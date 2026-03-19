@@ -20,14 +20,14 @@ When you ask Claude to "write a PRD", "create product requirements", or similar,
 ### Via Claude Code CLI
 
 ```bash
-claude plugin install https://github.com/YOUR_USERNAME/prd-skill
+claude plugin install https://github.com/carollrollroll/prd-skill
 ```
 
 ### Manual Installation
 
 1. Clone this repo:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/prd-skill ~/.claude/plugins/prd-skill
+   git clone https://github.com/carollrollroll/prd-skill ~/.claude/plugins/prd-skill
    ```
 
 2. Register the plugin in your Claude Code settings:
