@@ -20,10 +20,11 @@ When you ask Claude to "write a PRD", "create product requirements", or similar,
 ### Claude Code — global install (works in any project)
 
 ```bash
-claude plugin install https://github.com/carollrollroll/prd-skill
+claude plugin marketplace add carollrollroll/prd-skill
+claude plugin install prd-skill
 ```
 
-Or manually:
+Or manually via git:
 
 ```bash
 git clone https://github.com/carollrollroll/prd-skill ~/.claude/plugins/prd-skill
