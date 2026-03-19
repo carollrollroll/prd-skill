@@ -17,27 +17,40 @@ When you ask Claude to "write a PRD", "create product requirements", or similar,
 
 ## Installation
 
-### Via Claude Code CLI
+### Claude Code — global install (works in any project)
 
 ```bash
 claude plugin install https://github.com/carollrollroll/prd-skill
 ```
 
-### Manual Installation
+Or manually:
 
-1. Clone this repo:
-   ```bash
-   git clone https://github.com/carollrollroll/prd-skill ~/.claude/plugins/prd-skill
-   ```
+```bash
+git clone https://github.com/carollrollroll/prd-skill ~/.claude/plugins/prd-skill
+claude plugin add ~/.claude/plugins/prd-skill
+```
 
-2. Register the plugin in your Claude Code settings:
-   ```bash
-   claude plugin add ~/.claude/plugins/prd-skill
-   ```
+### Codex CLI / Gemini CLI — per-project
+
+These tools don't have a global plugin system. Clone this repo into your project directory and run the CLI from there:
+
+```bash
+# Clone into your project
+git clone https://github.com/carollrollroll/prd-skill
+
+# Run Codex or Gemini CLI inside the cloned directory
+cd prd-skill
+codex "write a PRD for a dark mode feature"
+gemini "write a PRD for a new onboarding flow"
+```
+
+The CLI tools will automatically pick up `AGENTS.md` (Codex) or `GEMINI.md` (Gemini) from the directory.
+
+> If you want to use this skill alongside your own project files, copy `AGENTS.md` / `GEMINI.md` and the `skills/` directory into your project root.
 
 ## Usage
 
-Just ask Claude naturally:
+Just ask naturally — no special command needed:
 
 ```
 Write a PRD for a dark mode feature in our web app
@@ -51,7 +64,7 @@ Help me create product requirements for a new user onboarding flow
 Draft a PRD for a mobile push notification system
 ```
 
-Claude will ask clarifying questions if needed, then produce a complete, copy-ready PRD in Markdown.
+The AI will ask clarifying questions if needed, then produce a complete, copy-ready PRD in Markdown.
 
 ## What You Get
 
