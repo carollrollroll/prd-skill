@@ -28,8 +28,9 @@ Or manually via git:
 
 ```bash
 git clone https://github.com/carollrollroll/prd-skill ~/.claude/plugins/prd-skill
-claude plugin add ~/.claude/plugins/prd-skill
 ```
+
+That's it — Claude Code auto-discovers plugins in `~/.claude/plugins/`. No extra command needed.
 
 ### Codex CLI / Gemini CLI — per-project
 
