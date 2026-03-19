@@ -17,38 +17,40 @@ When you ask Claude to "write a PRD", "create product requirements", or similar,
 
 ## Installation
 
-### Claude Code — global install (works in any project)
+### Claude Code
+
+Copy the skill into your project's `.claude/skills/` directory:
 
 ```bash
-claude plugin marketplace add carollrollroll/prd-skill
-claude plugin install prd-skill
+git clone https://github.com/carollrollroll/prd-skill /tmp/prd-skill
+mkdir -p .claude/skills
+cp -r /tmp/prd-skill/skills/prd .claude/skills/prd
 ```
 
-Or manually via git:
+Then invoke it with `/prd` or just ask Claude naturally.
+
+Alternatively, use a git submodule to keep it up to date:
 
 ```bash
-git clone https://github.com/carollrollroll/prd-skill ~/.claude/plugins/prd-skill
+git submodule add https://github.com/carollrollroll/prd-skill .claude/prd-skill
+mkdir -p .claude/skills
+cp -r .claude/prd-skill/skills/prd .claude/skills/prd
 ```
 
-That's it — Claude Code auto-discovers plugins in `~/.claude/plugins/`. No extra command needed.
-
-### Codex CLI / Gemini CLI — per-project
-
-These tools don't have a global plugin system. Clone this repo into your project directory and run the CLI from there:
+### Codex CLI / Gemini CLI
 
 ```bash
-# Clone into your project
 git clone https://github.com/carollrollroll/prd-skill
+cp -r prd-skill/skills .claude/skills   # Codex picks up AGENTS.md
+```
 
-# Run Codex or Gemini CLI inside the cloned directory
+Or run Codex / Gemini directly from the cloned directory:
+
+```bash
 cd prd-skill
 codex "write a PRD for a dark mode feature"
 gemini "write a PRD for a new onboarding flow"
 ```
-
-The CLI tools will automatically pick up `AGENTS.md` (Codex) or `GEMINI.md` (Gemini) from the directory.
-
-> If you want to use this skill alongside your own project files, copy `AGENTS.md` / `GEMINI.md` and the `skills/` directory into your project root.
 
 ## Usage
 
@@ -81,7 +83,7 @@ After running the skill, Claude will output a full PRD and offer to:
 
 | Tool | Entry Point | How It Works |
 |------|-------------|--------------|
-| [Claude Code](https://claude.ai/code) | `skills/prd/SKILL.md` | Loaded as a Claude Code plugin skill |
+| [Claude Code](https://claude.ai/code) | `skills/prd/SKILL.md` | Copy to `.claude/skills/prd/` in your project |
 | [OpenAI Codex CLI](https://github.com/openai/codex) | `AGENTS.md` | Read automatically as agent instructions |
 | [Gemini CLI](https://github.com/google-gemini/gemini-cli) | `GEMINI.md` | Read automatically as system context |
 
@@ -99,8 +101,6 @@ All three tools share the same `references/` and `templates/` content — only t
 prd-skill/
 ├── AGENTS.md                      # Entry point for OpenAI Codex CLI
 ├── GEMINI.md                      # Entry point for Gemini CLI
-├── .claude-plugin/
-│   └── plugin.json                # Claude Code plugin manifest
 ├── skills/
 │   └── prd/
 │       ├── SKILL.md               # Entry point for Claude Code
