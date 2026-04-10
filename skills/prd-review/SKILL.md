@@ -61,7 +61,6 @@ Reference loading rule for section-only review:
   - Section 2 → [../prd-write/references/prd-structure-section-2.md](../prd-write/references/prd-structure-section-2.md)
   - Section 3 → [../prd-write/references/prd-structure-section-3.md](../prd-write/references/prd-structure-section-3.md)
 - For full PRD review, use [../prd-write/references/prd-structure.md](../prd-write/references/prd-structure.md) as the primary structure reference.
-
 ### Step 3: Identify PRD Type
 
 Before reviewing, determine whether this is a **Full PRD** or **Lite PRD**:
@@ -82,7 +81,6 @@ Before detailed scoring, verify the PRD respects phase gates:
 - **Gate 3:** Section 3 stays within PM-Engineering contract boundary (feasibility/ownership/dependencies/contracts), not implementation micromanagement.
 
 If a later section appears complete but an earlier gate fails, mark downstream confidence accordingly and flag in Fix/Discuss with root-cause tags.
-
 ### Step 4: Run the Review
 
 Evaluate the PRD against the criteria below. Classify each item as:
