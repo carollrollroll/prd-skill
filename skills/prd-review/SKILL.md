@@ -41,15 +41,47 @@ Confirm where the PRD content is:
 2. If the user provided a file path, read the file
 3. If neither, ask: "Please paste the PRD content or provide a file path." (use the user's preferred language)
 
+### Step 2.5: Determine Review Scope (Gate-Aware)
+
+Identify whether the user wants:
+- **Full PRD review** (all sections/phases together), or
+- **Section-only review** (Section 1 only, Section 2 only, or Section 3 only)
+
+If scope is ambiguous, ask a direct clarification question.
+
+For section-only review, output the same report template but evaluate only the relevant section and gate-readiness:
+- Section 1 review result decides readiness to proceed to Section 2
+- Section 2 review result decides readiness to proceed to Section 3
+- Section 3 review result decides readiness for execution handoff
+
+Reference loading rule for section-only review:
+- Read [../prd-write/references/prd-structure-index.md](../prd-write/references/prd-structure-index.md) first
+- Then read only the corresponding focused section file:
+  - Section 1 → [../prd-write/references/prd-structure-section-1.md](../prd-write/references/prd-structure-section-1.md)
+  - Section 2 → [../prd-write/references/prd-structure-section-2.md](../prd-write/references/prd-structure-section-2.md)
+  - Section 3 → [../prd-write/references/prd-structure-section-3.md](../prd-write/references/prd-structure-section-3.md)
+- For full PRD review, use [../prd-write/references/prd-structure.md](../prd-write/references/prd-structure.md) as the primary structure reference.
+
 ### Step 3: Identify PRD Type
 
 Before reviewing, determine whether this is a **Full PRD** or **Lite PRD**:
 - **Full PRD**: Covers all three phases (Why & Who → What & If → How & Next). Used for new product areas, new user segments, or features that require their own business justification.
-- **Lite PRD**: Section 1 is inherited from a parent PRD; only defines the As-Is/To-Be delta and the specific metric this feature is moving. Used for optimizations or improvements within an existing module.
+- **Lite PRD**: Section 1 is inherited from a parent PRD and is not drafted again. This PRD starts from Section 2 with explicit parent Section 1 references. Used for optimizations or improvements within an existing module.
+
+Use [../prd-write/references/prd-structure-index.md](../prd-write/references/prd-structure-index.md) as the source of truth for Lite/Full mode rules.
 
 If unsure, infer from the content. If still ambiguous, ask directly (in the user's preferred language).
 
 Review criteria and depth differ by type — do not penalize a Lite PRD for missing full Section 1 content.
+
+### Step 3.5: Validate Phase-Gate Integrity (Mandatory)
+
+Before detailed scoring, verify the PRD respects phase gates:
+- **Gate 1:** Full mode requires explicit human-authored Section 1 anchors in the current PRD. Lite mode requires explicit parent Section 1 reference before Section 2 is treated as valid.
+- **Gate 2:** Section 2 has explicit approval readiness (coherent Stories/ACs/flows with no unresolved logic blockers) before Section 3 can be treated as valid.
+- **Gate 3:** Section 3 stays within PM-Engineering contract boundary (feasibility/ownership/dependencies/contracts), not implementation micromanagement.
+
+If a later section appears complete but an earlier gate fails, mark downstream confidence accordingly and flag in Fix/Discuss with root-cause tags.
 
 ### Step 4: Run the Review
 
@@ -86,11 +118,12 @@ Use [references/report-template.md](references/report-template.md) as the single
 
 ### Full PRD
 
-**Section 1 — Why & Who** *(counts toward required coverage: 4 points)*
+**Section 1 — Why & Who** *(counts toward required coverage: 5 points)*
 - [ ] Problem statement has a clear As-Is and To-Be (not just a solution description)
 - [ ] At least one user story or persona framed with JTBD
 - [ ] North Star Metric defined — assess whether it genuinely reflects core product value (not a vanity metric or a manipulable proxy); flag if the NSM doesn't align with the business objective
 - [ ] Business value articulated — why this feature, why now
+- [ ] Human anchor integrity: core Section 1 claims are grounded in explicit user/business input, not generic AI-fabricated assumptions
 
 **Section 1 — Quality Traps (Soul Check)**
 
@@ -102,12 +135,13 @@ After completing the completeness check, ask: *Does this Section say anything ge
 - Persona reads like a job title with attributes, not a real person with specific tension and motivation
 - The entire Section could be copy-pasted into a competitor's PRD unchanged — if so, it has no soul
 
-**Section 2 — What & If** *(counts toward required coverage: 5 points)*
+**Section 2 — What & If** *(counts toward required coverage: 6 points)*
 - [ ] User Stories are MoSCoW-prioritized (P0 / P1 / P2 / P3)
 - [ ] Every P0 Story has testable, unambiguous Acceptance Criteria — each AC should describe the condition, action, and expected outcome; flag ACs that are vague, missing conditions or results, or written as requirements rather than acceptance criteria (Given/When/Then is one valid format, not the only one)
 - [ ] Core happy path defined with clear steps
 - [ ] At least one edge case or error state defined
 - [ ] Won't Have (P3) section exists to control scope
+- [ ] Traceability: each P0 Story clearly maps to a Section 1 pain point/JTBD (not floating requirements)
 
 **Section 2 — Quality Traps (Logic & Coherence Check)**
 
@@ -118,6 +152,7 @@ After the completeness check, examine logical rigor and coherence with Section 1
 - **Redundancy**: Do multiple Stories describe the same behavior from slightly different angles without adding new meaning?
 - **Fallacy**: Does the flow assume a state that was never established? Does error handling reference an unreachable state?
 - **Scope drift**: Do P1/P2 Stories quietly expand beyond what Section 1 can reasonably justify?
+- **Gate readiness**: Is Section 2 logically stable enough to justify entering Section 3, or are there unresolved blockers that must be fixed first?
 
 **Section 3 — How & Next** *(counts toward required coverage: 2 points)*
 - [ ] Known technical dependencies or constraints are listed
@@ -155,6 +190,7 @@ Section 3 should define *what to build* and *where the boundaries are* — not *
 - **Section 2 coherence**: Does Section 3 cover all P0 Stories? If a P0 Story implies a state machine, API, or permission model, Section 3 should reflect it
 - **Roadmap without rationale**: Future Epics or Won't Do items should explain *why not now*, not just list feature names
 - **Trade-offs without consequences**: If trade-offs are listed, the accepted cost should be explicit — "we chose X, accepting that Y will happen"
+- **Gate misuse**: Section 3 attempts to compensate for unresolved Section 2 logic gaps by injecting implementation details (should be fixed in Section 2 instead)
 
 **Cross-Module Story Ownership Check**
 
@@ -167,14 +203,15 @@ If the PRD touches other modules, check:
 ### Lite PRD
 
 **Delta Definition**
-- [ ] As-Is / To-Be delta is specific and measurable (not just "improve X")
-- [ ] The specific metric being moved has a defined baseline and target value
-- [ ] References a parent PRD or inherited context
+- [ ] Parent PRD is referenced
+- [ ] Parent Section 1 anchor(s) are explicitly referenced (pain point/JTBD/NSM)
+- [ ] Lite PRD starts from Section 2 (does not re-author full Section 1)
 
 **Section 2 — What & If** (same as Full PRD)
 - [ ] P0 Stories have Acceptance Criteria
 - [ ] Core path + at least one edge case
 - [ ] Won't Have section
+- [ ] Traceability back to inherited parent context is explicit (what exact pain point/metric this delta moves)
 
 **Section 3 — How & Next** (same as Full PRD)
 - [ ] Dependencies listed
@@ -205,6 +242,10 @@ Use one of the following three verdicts:
 - Problem type tags (`[Contradiction]`, `[Gap]`, etc.) are diagnostic labels, not severity signals — `[Fallacy]` can be minor, `[Gap]` can be a blocker; let the content text convey severity
 - The three verdict lines (causal chain / assumption quality / scope discipline) should be stated as clear judgments, not hedged — "Section 1 → Section 2 is coherent, Section 3 boundary is clear" is more useful than "Section 1 and Section 2 seem broadly aligned"
 - When counting required coverage, only mark ✅ if the item is clear and substantive — vague hand-waving does not count. If an item exists but has quality issues (e.g., NSM exists but is not measurable), count it as covered and call out the quality issue under Assumption Quality or Fix. The score reflects completeness, not quality.
+- In section-only review mode, state explicit gate decision at the top of verdict summary:
+  - "Ready to proceed to Section 2" (for Section 1 reviews)
+  - "Ready to proceed to Section 3" (for Section 2 reviews)
+  - "Ready for execution handoff" (for Section 3 reviews)
 
 ---
 

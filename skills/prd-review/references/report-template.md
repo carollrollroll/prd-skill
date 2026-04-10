@@ -15,7 +15,8 @@ Review Date: [today's date] | Type: Full PRD / Lite PRD
 
 [1-2 sentences explaining the verdict — focus on execution readiness, not formatting]
 
-**Required Coverage:** Section 1: X/4 | Section 2: X/5 | Section 3: X/2 — Total X/11 (see Fix section for gaps)
+**Gate Decision:** [For full review: "Execution-ready gate: Pass / Conditional / Fail". For section-only review use exactly one: "Ready to proceed to Section 2" / "Ready to proceed to Section 3" / "Ready for execution handoff".]
+**Required Coverage:** [For full review: Section 1: X/5 | Section 2: X/6 | Section 3: X/2 — Total X/13. For section-only review: show only the reviewed section score and mark others as N/A.]
 **Causal Chain:** [One sentence: does Section 1 problem → Section 2 solution → Section 3 boundary form a coherent chain? Or does each Section talk past the others?]
 **Assumption Quality:** [One sentence: are the NSM and assumptions genuinely measurable? If there are structurally unmeasurable items, call them out inline with `[Fallacy]`]
 **Scope Discipline:** [One sentence: do P1/P2 Stories stay within the scope Section 1 can justify? Or is there quiet scope expansion?]
