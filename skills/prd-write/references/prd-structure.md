@@ -1,16 +1,36 @@
 # PRD Structure Reference
 
 Use this three-phase template when generating PRDs. Phases represent a progression from strategy → definition → implementation.
+In this document, **Phase** and **Section** are equivalent terms.
+
+Recommended authoring mode:
+- **MVP PRD first:** complete all required sections first, then enrich optional sections.
+- **Required by default:** As-Is/To-Be, JTBD, Success Metrics, P0 Stories + AC, Core/Edge/Error Flow, RBAC, Dependencies, Trade-offs, Open Questions (if any).
+- **Optional by context:** Stakeholder table, Service Blueprint, detailed roadmap/future epics.
+
+Focused references (recommended for section-by-section drafting):
+- [prd-structure-index.md](prd-structure-index.md)
+- [prd-structure-section-1.md](prd-structure-section-1.md)
+- [prd-structure-section-2.md](prd-structure-section-2.md)
+- [prd-structure-section-3.md](prd-structure-section-3.md)
 
 ---
 
-```markdown
+````markdown
 # PRD: [Feature/Product Name]
 
 **Author:** [Name]
 **Date:** [YYYY-MM-DD]
 **Status:** Draft | In Review | Approved
 **Version:** 1.0
+
+---
+
+### Lite Mode Header (required only when `mode=lite`)
+```markdown
+**Parent PRD:** [Link]
+**Parent Section 1 Reference:** [Specific subsection/anchor(s) reused in this Lite PRD]
+```
 
 ---
 
@@ -46,6 +66,8 @@ Use this three-phase template when generating PRDs. Phases represent a progressi
 - **Cognitive load concerns:** [What mental effort should we minimize?]
 
 ### Stakeholder Relationship
+*(Optional — include when cross-team alignment is a risk.)*
+
 | Stakeholder | Interest | Influence | Notes |
 |-------------|----------|-----------|-------|
 | [Name/Role] | [What they want] | High / Med / Low | |
@@ -62,9 +84,13 @@ Use this three-phase template when generating PRDs. Phases represent a progressi
 [How quickly does a new user experience the core value? What's the activation moment?]
 
 ### Packaging / Pricing
+*(Optional — required only if this feature changes packaging, gating, or pricing.)*
+
 [Which tier or plan includes this? Is it gated? How does it appear in pricing?]
 
 ### Monetization / Economic Buyer
+*(Optional — required only when purchase/upgrade behavior is part of feature value.)*
+
 [Who pays? What triggers a purchase or upgrade decision related to this feature?]
 
 ### Opportunity Cost / Switching Cost
@@ -97,6 +123,7 @@ Use this three-phase template when generating PRDs. Phases represent a progressi
 > Define what the product looks like and what scenarios it handles.
 
 ## 2.1 核心 User Story
+*(Optional summary — skip this section if your P0 stories in 2.2 already clearly express the core value and cost of inaction.)*
 
 ```
 As a ___
@@ -109,22 +136,27 @@ Because otherwise ___.
 
 ## 2.2 MoSCoW User Stories & Acceptance Criteria
 
+### ID Convention (required for traceability)
+- Story IDs: `P0-S1`, `P0-S2`, `P1-S1`...
+- AC IDs: `AC-1`, `AC-2` (or scoped format like `P0-S1-AC1`, `P0-S1-AC2`)
+
 ### Must Have — P0
 > Core flow is broken without these.
+> Assign explicit Story ID and AC IDs for traceability.
 
-- **[Story title]**
+- **[Story ID: P0-S1] [Story title]**
   - As a **[user]**, I want to **[action]**, so that **[benefit]**. Because otherwise **[cost of inaction]**.
   - **Acceptance Criteria:**
-    - [ ] Given [context], when [action], then [outcome]
-    - [ ] Given [context], when [action], then [outcome]
+    - [ ] **AC-1** Given [context], when [action], then [outcome]
+    - [ ] **AC-2** Given [context], when [action], then [outcome]
 
 ### Should Have — P1
 > Flow works without these, but a workaround is needed.
 
-- **[Story title]**
+- **[Story ID: P1-S1] [Story title]**
   - As a **[user]**, I want to **[action]**, so that **[benefit]**.
   - **Acceptance Criteria:**
-    - [ ] Given [context], when [action], then [outcome]
+    - [ ] **AC-1** Given [context], when [action], then [outcome]
 
 ### Could Have — P2
 > Nice-to-have; improves experience but doesn't affect core goal.
@@ -134,7 +166,14 @@ Because otherwise ___.
 ### Won't Have — P3
 > Explicitly out of scope for this version.
 
-- [Story title] — why excluded and when it might be revisited
+- [Story title] — out of scope for **this release**; include rationale and revisit condition
+
+### Traceability Matrix (P0 Required)
+> Full mode maps to current PRD Section 1. Lite mode maps to parent PRD Section 1 anchors.
+
+| Section 1 Pain Point / JTBD | P0 Story ID | P0 Story Title | Acceptance Criteria IDs | Section 3 Contract/Constraint Reference |
+|-----------------------------|-------------|----------------|--------------------------|-----------------------------------------|
+| [Pain/JTBD] | [P0-S1] | [Story title] | [AC-1, AC-2] | [API/State/RBAC/NFR ref] |
 
 ---
 
@@ -159,6 +198,8 @@ Because otherwise ___.
 | Error | User-Facing Message | Recovery Action |
 |-------|---------------------|-----------------|
 | [Error type] | [Message shown] | [How user recovers] |
+
+> Scope rule: use **Edge Cases** for non-error variant scenarios; use **Error Handling** for explicit failure states and recovery.
 
 ### Multi-User Interaction (Concurrent Access & Conflict)
 [How does the system behave when multiple users act on the same resource simultaneously? Define conflict resolution strategy.]
@@ -209,17 +250,21 @@ Fill in only the steps that exist in your core path. Add or remove columns as ne
 ### Domain Model & Bounded Context
 [Which domain/module owns this? What are the boundaries and dependencies?]
 
-### Entity / Aggregate (DB Prototype)
+### Entity / Aggregate (Domain Contract)
+> Capture business-level entities and relationships. Avoid internal schema micromanagement unless explicitly requested.
+
 | Entity | Key Fields | Relationships |
 |--------|-----------|---------------|
 | [Entity 1] | [Fields] | [Related to] |
 | [Entity 2] | [Fields] | [Related to] |
 
-### Key Functions / API Contract (API Prototype)
-| Method | Endpoint | Request | Response | Notes |
-|--------|----------|---------|----------|-------|
-| POST | /api/[resource] | [body schema] | [response schema] | |
-| GET | /api/[resource]/:id | | [response schema] | |
+### API Contract (Intent-Level)
+> Define API intent and contract boundaries (what/when), not internal implementation details (how).
+
+| Method | Endpoint | Input Intent | Output Intent | Notes |
+|--------|----------|--------------|---------------|-------|
+| POST | /api/[resource] | [What conditions/data are required] | [What business outcome/data is returned] | |
+| GET | /api/[resource]/:id | [What can be queried and by whom] | [What information is returned] | |
 
 ### Status Machine
 [Enumerate all states and valid transitions]
@@ -237,6 +282,14 @@ Fill in only the steps that exist in your core path. Add or remove columns as ne
 | Page | Purpose | Key Actions |
 |------|---------|-------------|
 | [Page name] | [What user does here] | [Primary CTA / interactions] |
+
+### UI States & Permission Visibility
+| Surface | Loading | Empty | Error | Success | Visibility Rule |
+|---------|---------|-------|-------|---------|-----------------|
+| [Page / Component] | [State behavior] | [State behavior] | [State behavior] | [State behavior] | [Who can see this and under what condition] |
+
+### Data Scale Assumption
+[Expected data volume (e.g., list size, growth rate) and whether pagination/lazy loading is required]
 
 ### Sitemap URLs
 ```
@@ -266,6 +319,7 @@ Fill in only the steps that exist in your core path. Add or remove columns as ne
 ---
 
 ## 3.4 發展藍圖 Roadmap
+*(Optional for v1 execution; required when this PRD is used for multi-quarter planning.)*
 
 ### Capability Roadmap & Scalability
 | Phase | Scope | Notes |
@@ -278,11 +332,14 @@ Fill in only the steps that exist in your core path. Add or remove columns as ne
 [Features that are clearly valuable but deferred — with rationale for why not now]
 
 ### Explicit Won't Do
-[Features that seem related but are permanently or long-term out of scope — why, and what to say if asked]
+[Features that are **long-term or permanently** out of scope — why, and what to say if asked]
+
+> Distinction rule: **Won't Have (P3)** = not in this release; **Explicit Won't Do** = long-term or permanent out of scope.
 
 ---
 
 ## Open Questions
+> If any open question exists, a named owner is mandatory.
 
 | # | Question | Owner | Due Date | Status |
 |---|----------|-------|----------|--------|
@@ -294,4 +351,4 @@ Fill in only the steps that exist in your core path. Add or remove columns as ne
 ## Appendix
 
 [Supporting research, data, mockups, Figma links, related documents, prior art]
-```
+````

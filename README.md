@@ -4,7 +4,7 @@ A skill collection for writing and reviewing Product Requirements Documents (PRD
 
 ## Skills Included
 
-### `/prd` — Write a PRD
+### `/prd-write` — Write a PRD
 
 When you ask Claude to "write a PRD", "create product requirements", or similar, this skill activates and guides you through a structured process to produce a complete, professional PRD covering:
 
@@ -44,7 +44,7 @@ cp -r /tmp/prd-skill/skills/. .claude/skills/
 ```bash
 git clone https://github.com/carollrollroll/prd-skill /tmp/prd-skill
 mkdir -p .claude/skills
-cp -r /tmp/prd-skill/skills/prd .claude/skills/prd          # writing only
+cp -r /tmp/prd-skill/skills/prd-write .claude/skills/prd-write          # writing only
 # cp -r /tmp/prd-skill/skills/prd-review .claude/skills/prd-review  # add review
 ```
 
@@ -58,10 +58,10 @@ cp -r /tmp/prd-skill/skills/. .claude/skills/   # overwrites with latest
 If you only want to update one skill:
 
 ```bash
-cp -r /tmp/prd-skill/skills/prd .claude/skills/prd
+cp -r /tmp/prd-skill/skills/prd-write .claude/skills/prd-write
 ```
 
-Then invoke with `/prd`, `/prd-review`, or just ask Claude naturally.
+Then invoke with `/prd-write`, `/prd-review`, or just ask Claude naturally.
 
 ---
 
@@ -74,7 +74,7 @@ git submodule add https://github.com/carollrollroll/prd-skill .claude/prd-skill
 mkdir -p .claude/skills
 cp -r .claude/prd-skill/skills/. .claude/skills/   # all skills
 # or copy specific skills:
-# cp -r .claude/prd-skill/skills/prd .claude/skills/prd
+# cp -r .claude/prd-skill/skills/prd-write .claude/skills/prd-write
 ```
 
 #### Updating (submodule)
@@ -149,7 +149,7 @@ The AI will output a structured review report with a clear verdict and actionabl
 
 ## What You Get
 
-**After `/prd`**, Claude outputs a full PRD and offers to:
+**After `/prd-write`**, Claude outputs a full PRD and offers to:
 - Add detail to any section
 - Break epics into specific user stories
 - Add technical considerations
@@ -167,11 +167,11 @@ The AI will output a structured review report with a clear verdict and actionabl
 
 | Tool | Entry Point | How It Works |
 |------|-------------|--------------|
-| [Claude Code](https://claude.ai/code) | `skills/prd/SKILL.md`, `skills/prd-review/SKILL.md` | Copy to `.claude/skills/` in your project |
+| [Claude Code](https://claude.ai/code) | `skills/prd-write/SKILL.md`, `skills/prd-review/SKILL.md` | Copy to `.claude/skills/` in your project |
 | [OpenAI Codex CLI](https://github.com/openai/codex) | `AGENTS.md` | Read automatically as agent instructions |
 | [Gemini CLI](https://github.com/google-gemini/gemini-cli) | `GEMINI.md` | Read automatically as system context |
 
-All three tools share the same `references/` and `templates/` content — only the entry point differs.
+All three tools use the same skill content — only the entry point differs.
 
 ## Templates Included
 
@@ -186,8 +186,8 @@ prd-skill/
 ├── AGENTS.md                          # Entry point for OpenAI Codex CLI
 ├── GEMINI.md                          # Entry point for Gemini CLI
 ├── skills/
-│   ├── prd/
-│   │   ├── SKILL.md                   # Entry point for Claude Code (/prd)
+│   ├── prd-write/
+│   │   ├── SKILL.md                   # Entry point for Claude Code (/prd-write)
 │   │   ├── references/
 │   │   │   ├── prd-structure.md       # Full 3-phase PRD template
 │   │   │   └── prd-structure-lite.md  # Lite template (Phase 2 & 3 only)
@@ -196,7 +196,9 @@ prd-skill/
 │   │       ├── mobile-app.md          # Mobile-specific guidance
 │   │       └── b2b-enterprise.md      # B2B / Enterprise guidance
 │   └── prd-review/
-│       └── SKILL.md                   # Entry point for Claude Code (/prd-review)
+│       ├── SKILL.md                   # Entry point for Claude Code (/prd-review)
+│       └── references/
+│           └── report-template.md     # Detailed PRD review report template
 └── README.md
 ```
 

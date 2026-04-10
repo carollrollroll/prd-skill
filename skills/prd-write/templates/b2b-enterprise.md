@@ -2,6 +2,10 @@
 
 Use this as a starting point for B2B or enterprise-facing features. Emphasis is on stakeholder complexity, monetization alignment, and procurement/compliance considerations.
 
+Quick usage guidance:
+- **MVP-first (recommended):** start with stakeholder map, 2-4 P0 stories, RBAC minimum, top 3 dependencies, and 3-5 success metrics.
+- **Advanced depth (optional):** expand compliance, integration surface, and rollout/roadmap only when required by deal size or risk.
+
 ---
 
 ## Phase 1 Emphasis — B2B-Specific Angles
@@ -22,7 +26,7 @@ In B2B there are typically 3–4 distinct roles involved. Map them explicitly:
 - Who signs off on the purchase — and what does their approval process look like?
 
 ### Opportunity Cost / Switching Cost
-- Enterprise switching cost is typically HIGH — emphasize lock-in through data, integrations, or workflow depth
+- Enterprise switching cost is typically high — document defensibility through data gravity, integrations, and workflow fit (avoid relying on forced lock-in alone)
 - What does a competitive displacement scenario look like? What would make a customer stay vs. leave?
 
 ### Time-to-Value (TTV)

@@ -11,9 +11,9 @@ Typical sections to emphasize:
 
 ## SaaS-Specific User Stories to Consider
 
-- As a **free tier user**, I want to [try the feature], so that [I understand its value before upgrading]
-- As a **team admin**, I want to [manage access], so that [I control what my team sees]
-- As an **API user**, I want to [access this via API], so that [I can integrate it into my workflow]
+- As a **free tier user**, I want to **[try the feature]**, so that **[I understand its value before upgrading]**. Because otherwise **[I won't evaluate enough value to upgrade]**.
+- As a **team admin**, I want to **[manage access]**, so that **[I control what my team sees]**. Because otherwise **[I risk exposing data to the wrong members]**.
+- As an **API user**, I want to **[access this via API]**, so that **[I can integrate it into my workflow]**. Because otherwise **[I need manual workarounds that don't scale]**.
 
 ## SaaS-Specific Success Metrics to Consider
 
