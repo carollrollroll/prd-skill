@@ -1,14 +1,10 @@
 # PRD Structure — Section 2 (What & If)
 
-Use this focused template when drafting only Section 2.
-
 ````markdown
 # Phase 2: What & If
 
-> Define what the product looks like and what scenarios it handles.
-
 ## 2.1 核心 User Story
-*(Optional summary — skip this section if your P0 stories in 2.2 already clearly express the core value and cost of inaction.)*
+*(Optional)*
 
 ```
 As a ___
@@ -20,45 +16,64 @@ Because otherwise ___.
 ---
 
 ## 2.2 MoSCoW User Stories & Acceptance Criteria
+> Reference: [../principles/user-story-ac-principles.md](../principles/user-story-ac-principles.md)
 
 ### ID Convention (required for traceability)
-- Story IDs: `P0-S1`, `P0-S2`, `P1-S1`...
-- AC IDs: `AC-1`, `AC-2` (or scoped format like `P0-S1-AC1`, `P0-S1-AC2`)
+- Story IDs: `US-01`, `US-02`, `US-03`...
+- AC IDs: `AC-01-01`, `AC-01-02` (map to `US-01`)
 
 ### Must Have — P0
-> Core flow is broken without these.
-> Assign explicit Story ID and AC IDs for traceability.
-
-- **[Story ID: P0-S1] [Story title]**
+- **[Story ID: US-01] [Story title]**
   - As a **[user]**, I want to **[action]**, so that **[benefit]**. Because otherwise **[cost of inaction]**.
   - **Acceptance Criteria:**
-    - [ ] **AC-1** Given [context], when [action], then [outcome]
-    - [ ] **AC-2** Given [context], when [action], then [outcome]
+    - [ ] **AC-01-01 (Happy Path)** Given [context], when [action], then [outcome], and [business rule enforced]
+      - Field Definitions: [field_name: type/required/constraints, optional: default/example/source/format/unit/notes]
+      - Verification: [test step + expected evidence]
+    - [ ] **AC-01-02 (Reverse Flow, optional when applicable)** Given [context], when [cancel/back/undo], then [reverse outcome], and [business rule enforced]
+      - Field Definitions: [field_name: type/required/constraints, optional: default/example/source/format/unit/notes]
+      - Verification: [test step + expected evidence]
+    - [ ] **AC-01-03 (Error Handling, optional when applicable)** Given [error context], when [action], then [error outcome], and [business rule enforced]
+      - Field Definitions: [field_name: type/required/constraints, optional: default/example/source/format/unit/notes]
+      - Verification: [test step + expected evidence]
+    - [ ] If not applicable: `N/A (reason)`
 
 ### Should Have — P1
-> Flow works without these, but a workaround is needed.
-
-- **[Story ID: P1-S1] [Story title]**
+- **[Story ID: US-02] [Story title]**
   - As a **[user]**, I want to **[action]**, so that **[benefit]**.
   - **Acceptance Criteria:**
-    - [ ] **AC-1** Given [context], when [action], then [outcome]
+    - [ ] **AC-02-01 (Happy Path)** Given [context], when [action], then [outcome], and [business rule enforced]
+      - Field Definitions: [field_name: type/required/constraints, optional: default/example/source/format/unit/notes]
+      - Verification: [test step + expected evidence]
+    - [ ] **AC-02-02 (Reverse Flow, optional when applicable)** Given [context], when [cancel/back/undo], then [reverse outcome], and [business rule enforced]
+      - Field Definitions: [field_name: type/required/constraints, optional: default/example/source/format/unit/notes]
+      - Verification: [test step + expected evidence]
+    - [ ] **AC-02-03 (Error Handling, optional when applicable)** Given [error context], when [action], then [error outcome], and [business rule enforced]
+      - Field Definitions: [field_name: type/required/constraints, optional: default/example/source/format/unit/notes]
+      - Verification: [test step + expected evidence]
+    - [ ] If not applicable: `N/A (reason)`
 
 ### Could Have — P2
-> Nice-to-have; improves experience but doesn't affect core goal.
-
-- [Story title] — brief description
+- **[Story ID: US-03] [Story title]**
+  - As a **[user]**, I want to **[action]**, so that **[benefit]**.
+  - **Acceptance Criteria:**
+    - [ ] **AC-03-01 (Happy Path)** Given [context], when [action], then [outcome], and [business rule enforced]
+      - Field Definitions: [field_name: type/required/constraints, optional: default/example/source/format/unit/notes]
+      - Verification: [test step + expected evidence]
+    - [ ] **AC-03-02 (Reverse Flow, optional when applicable)** Given [context], when [cancel/back/undo], then [reverse outcome], and [business rule enforced]
+      - Field Definitions: [field_name: type/required/constraints, optional: default/example/source/format/unit/notes]
+      - Verification: [test step + expected evidence]
+    - [ ] **AC-03-03 (Error Handling, optional when applicable)** Given [error context], when [action], then [error outcome], and [business rule enforced]
+      - Field Definitions: [field_name: type/required/constraints, optional: default/example/source/format/unit/notes]
+      - Verification: [test step + expected evidence]
+    - [ ] If not applicable: `N/A (reason)`
 
 ### Won't Have — P3
-> Explicitly out of scope for this version.
-
 - [Story title] — out of scope for **this release**; include rationale and revisit condition
 
 ### Traceability Matrix (P0 Required)
-> Full mode maps to current PRD Section 1. Lite mode maps to parent PRD Section 1 anchors.
-
 | Section 1 Pain Point / JTBD | P0 Story ID | P0 Story Title | Acceptance Criteria IDs | Section 3 Contract/Constraint Reference |
 |-----------------------------|-------------|----------------|--------------------------|-----------------------------------------|
-| [Pain/JTBD] | [P0-S1] | [Story title] | [AC-1, AC-2] | [API/State/RBAC/NFR ref] |
+| [Pain/JTBD] | [US-01] | [Story title] | [AC-01-01 (+ optional AC-01-02/03 or N/A note)] | [API/State/RBAC/NFR ref] |
 
 ---
 
@@ -83,8 +98,6 @@ Because otherwise ___.
 | Error | User-Facing Message | Recovery Action |
 |-------|---------------------|-----------------|
 | [Error type] | [Message shown] | [How user recovers] |
-
-> Scope rule: use **Edge Cases** for non-error variant scenarios; use **Error Handling** for explicit failure states and recovery.
 
 ### Multi-User Interaction (Concurrent Access & Conflict)
 [How does the system behave when multiple users act on the same resource simultaneously? Define conflict resolution strategy.]
@@ -115,8 +128,7 @@ Because otherwise ___.
 
 ## 2.5 NSM Validation via P0 (Required for P0 Changes)
 
-> Section 1 owns NSM direction. This section proves P0 can move it.
-> Reference: [../principles/success-metrics-principles.md](../principles/success-metrics-principles.md)
+> Reference: [../principles/nsm-metrics-principles.md](../principles/nsm-metrics-principles.md)
 
 ### Section 1 Metric Reference (Do Not Redefine Here)
 - NSM (1): [Reference to Section 1.4]
@@ -127,16 +139,14 @@ Because otherwise ___.
 ### P0 Story -> Leading Metric Contribution
 | P0 Story ID | Behavior changed by this P0 | Leading metric contribution | Validation signal |
 |-------------|-----------------------------|-----------------------------|-------------------|
-| [P0-S1] | [Behavior delta] | [How this P0 moves leading] | [Event or log evidence] |
-
-> If no leading metric is defined, replace "Leading metric contribution" with "Direct NSM contribution rationale".
+| [US-01] | [Behavior delta] | [How this P0 moves leading] | [Event or log evidence] |
 
 ### Causality & Confounder Check
 | Link | Why it is causal (not correlation) | Main confounder | Mitigation |
 |------|------------------------------------|-----------------|------------|
 | [P0 -> Leading -> NSM] | [Reasoning] | [Competing explanation] | [How to control] |
 
-### Optional Data Reliability & Slice Checks (Use when risk is non-trivial)
+### Optional Data Reliability & Slice Checks
 - **Data reliability thresholds:** missing rate <= [x]%, event delay <= [x] min, duplicate rate <= [x]%
 - **Core slice for review:** [new vs returning / plan tier / region]
 

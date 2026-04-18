@@ -10,7 +10,13 @@ Use this index when drafting PRDs section-by-section.
 
 ## Supporting References
 - Persona & Stakeholders writing guide: [../principles/persona-stakeholder-principles.md](../principles/persona-stakeholder-principles.md)
-- Success metrics writing guide: [../principles/success-metrics-principles.md](../principles/success-metrics-principles.md)
+- NSM metrics writing guide: [../principles/nsm-metrics-principles.md](../principles/nsm-metrics-principles.md)
+- User Story & AC writing guide: [../principles/user-story-ac-principles.md](../principles/user-story-ac-principles.md)
+
+## Boundary Contract (Principles vs Structure)
+- `principles/`: writing methods, decision rules, quality criteria, anti-patterns.
+- `references/prd-structure*.md`: output format definitions only (section order, required fields, ID conventions, table/markdown skeletons).
+- If a new rule answers "how to write/judge quality", place it in `principles/` and only link to it from structure files.
 
 ## Mode Selection (Full vs Lite)
 Use the same section files for both modes. Lite is a generation/review mode, not a separate template file.
@@ -43,8 +49,8 @@ When `mode=lite`, apply these constraints:
 
 ### Story & AC ID Convention (for Traceability Matrix)
 Use explicit Story IDs and AC IDs so matrix mapping is unambiguous:
-- P0 story examples: `P0-S1`, `P0-S2`
-- Acceptance criteria examples: `AC-1`, `AC-2` (or `P0-S1-AC1`, `P0-S1-AC2` for multi-story clarity)
+- Story examples: `US-01`, `US-02`
+- Acceptance criteria examples: `AC-01-01`, `AC-01-02` (map to `US-01`)
 
 ## Gate Rules
 1. Full mode: do not draft Section 2 until Section 1 is explicitly approved.

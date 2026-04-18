@@ -1,11 +1,7 @@
 # PRD Structure — Section 3 (How & Next)
 
-Use this focused template when drafting only Section 3.
-
 ````markdown
 # Phase 3: How & Next
-
-> Define how to build it and what comes after.
 
 ## 3.1 關鍵後端實體
 
@@ -13,16 +9,12 @@ Use this focused template when drafting only Section 3.
 [Which domain/module owns this? What are the boundaries and dependencies?]
 
 ### Entity / Aggregate (Domain Contract)
-> Capture business-level entities and relationships. Avoid internal schema micromanagement unless explicitly requested.
-
 | Entity | Key Fields | Relationships |
 |--------|-----------|---------------|
 | [Entity 1] | [Fields] | [Related to] |
 | [Entity 2] | [Fields] | [Related to] |
 
 ### API Contract (Intent-Level)
-> Define API intent and contract boundaries (what/when), not internal implementation details (how).
-
 | Method | Endpoint | Input Intent | Output Intent | Notes |
 |--------|----------|--------------|---------------|-------|
 | POST | /api/[resource] | [What conditions/data are required] | [What business outcome/data is returned] | |
@@ -81,7 +73,7 @@ Use this focused template when drafting only Section 3.
 ---
 
 ## 3.4 發展藍圖 Roadmap
-*(Optional for v1 execution; required when this PRD is used for multi-quarter planning.)*
+*(Optional)*
 
 ### Capability Roadmap & Scalability
 | Phase | Scope | Notes |
@@ -96,13 +88,9 @@ Use this focused template when drafting only Section 3.
 ### Explicit Won't Do
 [Features that are long-term or permanently out of scope — why, and what to say if asked]
 
-> Distinction rule: **Won't Have (P3)** = not in this release; **Explicit Won't Do** = long-term or permanent out of scope.
-
 ---
 
 ## Open Questions
-> If any open question exists, a named owner is mandatory.
-
 | # | Question | Owner | Due Date | Status |
 |---|----------|-------|----------|--------|
 | 1 | [Unresolved decision] | [Name] | [Date] | Open |

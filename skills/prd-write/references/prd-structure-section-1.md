@@ -1,10 +1,6 @@
 # PRD Structure — Section 1 (Why & Who)
 
-Use this focused template when drafting only Section 1.
-
 # Phase 1: Why & Who
-
-> Define the value, the audience, and how to prove it worked.
 
 ## 1.1 問題與情境 Context
 
@@ -22,7 +18,7 @@ Use this focused template when drafting only Section 1.
 
 ## 1.2 Persona & Stakeholders
 
-Use this section as a compact structure. For detailed writing rules and examples, see `../principles/persona-stakeholder-principles.md`.
+Reference: `../principles/persona-stakeholder-principles.md`
 
 ### Persona & Requirements
 | Role | JTBD (When/Want/So I can) | Internal (Mindset/Cognitive Load) | External (Stakeholder Dynamics) | Result (Responsibility/Risk) |
@@ -31,7 +27,7 @@ Use this section as a compact structure. For detailed writing rules and examples
 | [Secondary role] | When ___, I want to ___, so I can ___ | [What drives or burdens this role mentally] | [How this role interacts with or is constrained by others] | [What this role must own and what risk it bears] |
 
 ### Stakeholder Relationship (ASCII)
-*(Optional — include when role interaction is complex.)*
+*(Optional)*
 
 ```text
 [External Factor: Regulation/Policy/SLA/Deadline] --> [Supervisor]
@@ -41,8 +37,6 @@ Use this section as a compact structure. For detailed writing rules and examples
         -------------- [Secretary] -----------------------
 ```
 
-- Add evidence notes when available (`Interview` / `Data` / `Ticket` / `Hypothesis` / `Market Observation`) to strengthen requirement confidence.
-
 ---
 
 ## 1.3 商業價值 Business Value
@@ -51,12 +45,12 @@ Use this section as a compact structure. For detailed writing rules and examples
 [How quickly does a new user experience the core value? What's the activation moment?]
 
 ### Packaging / Pricing
-*(Optional — required only if this feature changes packaging, gating, or pricing.)*
+*(Optional)*
 
 [Which tier or plan includes this? Is it gated? How does it appear in pricing?]
 
 ### Monetization / Economic Buyer
-*(Optional — required only when purchase/upgrade behavior is part of feature value.)*
+*(Optional)*
 
 [Who pays? What triggers a purchase or upgrade decision related to this feature?]
 

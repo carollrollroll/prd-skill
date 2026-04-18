@@ -52,13 +52,16 @@ Focused drafting references:
 - [references/prd-structure-section-1.md](references/prd-structure-section-1.md)
 - [references/prd-structure-section-2.md](references/prd-structure-section-2.md)
 - [references/prd-structure-section-3.md](references/prd-structure-section-3.md)
-- [principles/success-metrics-principles.md](principles/success-metrics-principles.md)
+- [principles/nsm-metrics-principles.md](principles/nsm-metrics-principles.md)
 - [principles/persona-stakeholder-principles.md](principles/persona-stakeholder-principles.md)
+- [principles/user-story-ac-principles.md](principles/user-story-ac-principles.md)
 
 Usage rule:
 - Section-by-section drafting should use the focused section files.
 - Lite/Full behavior should follow mode rules in [references/prd-structure-index.md](references/prd-structure-index.md).
 - Final consolidated output should follow [references/prd-structure.md](references/prd-structure.md).
+- New writing methods, decision heuristics, and quality guardrails should be added under `principles/`.
+- `references/prd-structure*.md` should remain format-first (sections, fields, IDs, table skeletons) and avoid embedding new writing methodologies.
 
 If unsure, ask: "Does a parent PRD already define the Why & Who for this area?" If yes → Lite. If no → Full.
 

@@ -53,7 +53,6 @@ If no decision output exists, the row is non-actionable.
 
 - `Stakeholder Relationship` can be expressed in `ASCII`.
 - Focus on role-to-role interaction structure only: who interacts with whom, and in what sequence.
-- Do not encode feature logic in the relationship map.
 - Include key external influence factors in the map as separate nodes (e.g., regulation, policy, SLA, deadline), with arrows to the roles they influence.
 - `Persona & Requirements` defines decision content; `Stakeholder Relationship (ASCII)` defines interaction structure.
 - Roles that materially affect decisions, especially final approvers, should be reflected in `Result` with clear traceability.
@@ -74,4 +73,5 @@ If no decision output exists, the row is non-actionable.
 - Writing demographic persona instead of decision persona.
 - Mixing internal and external forces without making decision implications explicit.
 - Listing responsibility/risk vaguely without product safeguard implications.
+- Encoding feature logic in `Stakeholder Relationship (ASCII)` instead of keeping it as interaction structure.
 - Making a relationship map that has no effect on `External` or `Result` decisions.
