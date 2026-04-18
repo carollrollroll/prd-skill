@@ -52,6 +52,7 @@ Focused drafting references:
 - [references/prd-structure-section-1.md](references/prd-structure-section-1.md)
 - [references/prd-structure-section-2.md](references/prd-structure-section-2.md)
 - [references/prd-structure-section-3.md](references/prd-structure-section-3.md)
+- [references/success-metrics-principles.md](references/success-metrics-principles.md)
 
 Usage rule:
 - Section-by-section drafting should use the focused section files.
@@ -98,7 +99,9 @@ Lite mode:
 Generate Section 2 and enforce alignment with Section 1 anchors:
 - Full mode: map to approved current PRD Section 1
 - Lite mode: map to referenced parent PRD Section 1 anchors
+- Treat Section 1 NSM as the strategic direction; do not redefine NSM in Section 2
 - Every P0 Story must map back to a pain point or job
+- If leading metric exists, every P0 Story must show contribution to it; otherwise explain direct contribution to NSM
 - Acceptance Criteria must be testable and unambiguous
 - Include core flow + edge/error cases
 - Include Won't Have (P3)
@@ -148,8 +151,11 @@ Default output pattern:
 Before finishing, verify the PRD has:
 - [ ] A clear As-Is / To-Be problem statement (not just a solution description)
 - [ ] At least one JTBD framed user story
-- [ ] Full PRD: a North Star Metric with at least one leading and one lagging indicator
-- [ ] Lite PRD: parent North Star is referenced, plus one moved leading indicator and one counter metric
+- [ ] Full PRD: exactly one NSM is defined in Section 1
+- [ ] NSM is defined in Section 1 from a concrete problem statement (not from dashboard availability)
+- [ ] Leading/Lagging/Counter are optional; include only when they improve decision quality
+- [ ] If optional metrics are included, denominator and observation window are explicitly defined
+- [ ] Lite PRD: parent North Star is referenced, and Section 2 explains how P0 validates that NSM direction
 - [ ] Full PRD: Section 1 anchors come from explicit user input (not AI-generated guesses)
 - [ ] Lite PRD: parent Section 1 anchors are explicitly referenced before Section 2 drafting
 - [ ] MoSCoW-prioritized user stories (P0 stories must have Acceptance Criteria)

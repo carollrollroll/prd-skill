@@ -70,18 +70,30 @@ Use this focused template when drafting only Section 1.
 
 ## 1.4 成功指標 Success Metrics
 
-### North Star Metric
-**[The single metric that best represents user value delivered]**
+### NSM Direction (Problem-First)
+- **Problem being solved:** [What user pain is reduced]
+- **Behavior change we expect first:** [What users should do differently]
+- **North Star Metric (exactly 1):** [The single metric that best represents sustainable user value]
+- **Why this NSM (not vanity):** [Why this reflects real value]
 
-| Type | Metric | Baseline | Target |
-|------|--------|----------|--------|
-| Leading | [Early signal that we're on track] | | |
-| Lagging | [Outcome metric, measured later] | | |
-| Counter | [Guardrail — must not get worse] | | |
+### Required Metric Contract (Must Fill)
+| Type | Metric | Definition | Denominator | Baseline Window | Target | Owner |
+|------|--------|------------|-------------|-----------------|--------|-------|
+| NSM (required, exactly 1) | [Metric name] | [Exact definition/formula] | [All / Active / Affected users] | [e.g., last 28 days] | [Time-bound target] | [Name/Role] |
 
-### Hypothesis Validation
-[What assumption are we testing? What result would prove/disprove it?]
+### Optional Metrics (Fill only if needed)
+| Type | Metric | Definition | Denominator | Baseline Window | Target | Owner |
+|------|--------|------------|-------------|-----------------|--------|-------|
+| Leading (optional, 0..1) | [Early signal] | [Exact definition/formula] | [User set] | [e.g., 7 days] | [Time-bound target] | [Name/Role] |
+| Lagging (optional, 0..1) | [Outcome metric] | [Exact definition/formula] | [User set] | [e.g., 28 days] | [Time-bound target] | [Name/Role] |
+| Counter (optional, 0..1) | [Guardrail] | [Exact definition/formula] | [User set] | [e.g., 7/28 days] | [Acceptable limit] | [Name/Role] |
 
-### Expected Timeline
-[When do we expect to see meaningful signal on each metric above?]
+### Hypothesis Validation (Structured, Required)
+| Field | Content |
+|------|---------|
+| Hypothesis | [If we solve X problem for Y user in Z context, then NSM should move because ...] |
+| In Scope | [What this test validates in this PRD] |
+| Out of Scope | [What this test does NOT validate] |
+| Success Signal (optional) | [What observation supports the hypothesis] |
+| Failure Signal (optional) | [What observation weakens/rejects the hypothesis] |
 ````

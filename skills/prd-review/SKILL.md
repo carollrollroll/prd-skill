@@ -61,6 +61,7 @@ Reference loading rule for section-only review:
   - Section 2 → [../prd-write/references/prd-structure-section-2.md](../prd-write/references/prd-structure-section-2.md)
   - Section 3 → [../prd-write/references/prd-structure-section-3.md](../prd-write/references/prd-structure-section-3.md)
 - For full PRD review, use [../prd-write/references/prd-structure.md](../prd-write/references/prd-structure.md) as the primary structure reference.
+- For NSM/metrics judgment in any scope, use [../prd-write/references/success-metrics-principles.md](../prd-write/references/success-metrics-principles.md) as the policy reference.
 ### Step 3: Identify PRD Type
 
 Before reviewing, determine whether this is a **Full PRD** or **Lite PRD**:
@@ -116,10 +117,11 @@ Use [references/report-template.md](references/report-template.md) as the single
 
 ### Full PRD
 
-**Section 1 — Why & Who** *(counts toward required coverage: 5 points)*
+**Section 1 — Why & Who** *(counts toward required coverage: 6 points)*
 - [ ] Problem statement has a clear As-Is and To-Be (not just a solution description)
 - [ ] At least one user story or persona framed with JTBD
-- [ ] North Star Metric defined — assess whether it genuinely reflects core product value (not a vanity metric or a manipulable proxy); flag if the NSM doesn't align with the business objective
+- [ ] Exactly one NSM is defined from the problem statement and reflects core product value (not vanity)
+- [ ] NSM required contract is measurable: definition/formula, denominator, baseline window, target, owner
 - [ ] Business value articulated — why this feature, why now
 - [ ] Human anchor integrity: core Section 1 claims are grounded in explicit user/business input, not generic AI-fabricated assumptions
 
@@ -130,6 +132,9 @@ After completing the completeness check, ask: *Does this Section say anything ge
 - As-Is description is vague enough to apply to any product
 - "Why now" only lists industry trends without connecting to a specific timing trigger for this product
 - NSM sounds reasonable but cannot distinguish success from failure (e.g., "improve engagement" with no direction or threshold)
+- NSM has no clear denominator or observation window, making it non-verifiable
+- Optional metrics (leading/lagging/counter) are treated as mandatory checklist items instead of decision aids
+- Optional `Success Signal` / `Failure Signal` is missing clear thresholds or window when provided, so hypothesis judgment is not actionable
 - Persona reads like a job title with attributes, not a real person with specific tension and motivation
 - The entire Section could be copy-pasted into a competitor's PRD unchanged — if so, it has no soul
 
@@ -139,7 +144,7 @@ After completing the completeness check, ask: *Does this Section say anything ge
 - [ ] Core happy path defined with clear steps
 - [ ] At least one edge case or error state defined
 - [ ] Won't Have (P3) section exists to control scope
-- [ ] Traceability: each P0 Story clearly maps to a Section 1 pain point/JTBD (not floating requirements)
+- [ ] Traceability: each P0 Story clearly maps to a Section 1 pain point/JTBD and NSM direction (not floating requirements)
 
 **Section 2 — Quality Traps (Logic & Coherence Check)**
 
@@ -149,6 +154,7 @@ After the completeness check, examine logical rigor and coherence with Section 1
 - **Gap**: Are there implied scenarios in the flow with no Story or AC covering them? (e.g., what happens when an async process fails mid-way)
 - **Redundancy**: Do multiple Stories describe the same behavior from slightly different angles without adding new meaning?
 - **Fallacy**: Does the flow assume a state that was never established? Does error handling reference an unreachable state?
+- **Metrics validation logic**: If optional leading/lagging/counter metrics are present, are they used to support decisions (not vanity decoration)? If absent, does Section 2 still provide a direct NSM validation path through P0 behaviors?
 - **Scope drift**: Do P1/P2 Stories quietly expand beyond what Section 1 can reasonably justify?
 - **Gate readiness**: Is Section 2 logically stable enough to justify entering Section 3, or are there unresolved blockers that must be fixed first?
 
@@ -209,7 +215,7 @@ If the PRD touches other modules, check:
 - [ ] P0 Stories have Acceptance Criteria
 - [ ] Core path + at least one edge case
 - [ ] Won't Have section
-- [ ] Traceability back to inherited parent context is explicit (what exact pain point/metric this delta moves)
+- [ ] Traceability back to inherited parent context is explicit (what exact pain point and NSM direction this delta moves)
 
 **Section 3 — How & Next** (same as Full PRD)
 - [ ] Dependencies listed
@@ -232,7 +238,7 @@ Use one of the following three verdicts:
 - Write for a time-constrained PM Lead — direct, scannable
 - Fix items: give specific prescriptions ("add Given/When/Then AC to Story 2"), not vague ones ("ACs need improvement")
 - Discuss items: stay neutral — the PM didn't write something wrong, this is just a decision that needs to be made
-- OK items: be specific — "North Star Metric includes both a leading indicator (weekly active reviewers) and a lagging indicator (PRD cycle time)" is more useful than "metrics are well written"
+- OK items: be specific — "NSM has clear denominator, 28-day baseline window, and named decision owner" is more useful than "metrics are well written"
 - No nitpicking: do not escalate minor writing preferences into issues unless they create execution risk
 - No forced balance: do not add token Fix/Discuss items when the PRD is already execution-ready
 - If there are no major issues, say so explicitly and praise strongly with concrete evidence

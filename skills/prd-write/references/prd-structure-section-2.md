@@ -110,4 +110,39 @@ Because otherwise ___.
 
 ### Source of Truth & Data Export
 [What is the canonical data source? What export formats are supported?]
+
+---
+
+## 2.5 NSM Validation via P0 (Required for P0 Changes)
+
+> Section 1 owns NSM direction. This section proves P0 can move it.
+> Reference: [success-metrics-principles.md](success-metrics-principles.md)
+
+### Section 1 Metric Reference (Do Not Redefine Here)
+- NSM (1): [Reference to Section 1.4]
+- Leading (optional): [Reference to Section 1.4]
+- Lagging (optional): [Reference to Section 1.4]
+- Counter (optional): [Reference to Section 1.4]
+
+### P0 Story -> Leading Metric Contribution
+| P0 Story ID | Behavior changed by this P0 | Leading metric contribution | Validation signal |
+|-------------|-----------------------------|-----------------------------|-------------------|
+| [P0-S1] | [Behavior delta] | [How this P0 moves leading] | [Event or log evidence] |
+
+> If no leading metric is defined, replace "Leading metric contribution" with "Direct NSM contribution rationale".
+
+### Causality & Confounder Check
+| Link | Why it is causal (not correlation) | Main confounder | Mitigation |
+|------|------------------------------------|-----------------|------------|
+| [P0 -> Leading -> NSM] | [Reasoning] | [Competing explanation] | [How to control] |
+
+### Optional Data Reliability & Slice Checks (Use when risk is non-trivial)
+- **Data reliability thresholds:** missing rate <= [x]%, event delay <= [x] min, duplicate rate <= [x]%
+- **Core slice for review:** [new vs returning / plan tier / region]
+
+### Decision Rules (Launch / Iterate / Rollback) (Required)
+- If leading is defined and reaches [threshold] within [window], continue rollout and monitor lagging (if defined).
+- If leading is defined but fails while adoption is sufficient, revise P0 design/flow.
+- If no leading is defined, use direct NSM movement over [window] as the primary iterate signal.
+- If counter is defined and breaches [threshold], pause or rollback regardless of leading/NSM gain.
 ````

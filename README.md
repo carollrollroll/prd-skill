@@ -1,6 +1,6 @@
 # PRD Skill
 
-A skill collection for writing and reviewing Product Requirements Documents (PRDs) — works with Claude Code, OpenAI Codex CLI, and Gemini CLI.
+A skill collection for writing and reviewing Product Requirements Documents (PRDs) in Claude Code.
 
 ## Skills Included
 
@@ -84,31 +84,6 @@ git submodule update --remote .claude/prd-skill
 cp -r .claude/prd-skill/skills/. .claude/skills/
 ```
 
-### Codex CLI / Gemini CLI
-
-#### First-time install
-
-```bash
-git clone https://github.com/carollrollroll/prd-skill /tmp/prd-skill
-mkdir -p .claude/skills
-cp -r /tmp/prd-skill/skills/. .claude/skills/
-```
-
-#### Updating
-
-```bash
-cd /tmp/prd-skill && git pull
-cp -r /tmp/prd-skill/skills/. .claude/skills/
-```
-
-Or run Codex / Gemini directly from the cloned directory without copying:
-
-```bash
-cd /tmp/prd-skill
-codex "write a PRD for a dark mode feature"
-gemini "review my PRD for the onboarding flow"
-```
-
 ## Usage
 
 ### Writing a PRD
@@ -158,20 +133,16 @@ The AI will output a structured review report with a clear verdict and actionabl
 
 **After `/prd-review`**, Claude outputs a structured review report with:
 - Overall verdict (APPROVED / APPROVED WITH CONDITIONS / NEEDS REVISION)
-- Required coverage score (Phase 1: X/4 | Phase 2: X/5 | Phase 3: X/3)
+- Required coverage score (Section 1: X/6 | Section 2: X/6 | Section 3: X/2)
 - Itemized Fix list with specific prescriptions
 - Discuss list with questions for PM Lead alignment
 - OK highlights with specific praise
 
-## Supported CLI Tools
+## Supported Tool
 
 | Tool | Entry Point | How It Works |
 |------|-------------|--------------|
 | [Claude Code](https://claude.ai/code) | `skills/prd-write/SKILL.md`, `skills/prd-review/SKILL.md` | Copy to `.claude/skills/` in your project |
-| [OpenAI Codex CLI](https://github.com/openai/codex) | `AGENTS.md` | Read automatically as agent instructions |
-| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | `GEMINI.md` | Read automatically as system context |
-
-All three tools use the same skill content — only the entry point differs.
 
 ## Templates Included
 
@@ -183,14 +154,16 @@ All three tools use the same skill content — only the entry point differs.
 
 ```
 prd-skill/
-├── AGENTS.md                          # Entry point for OpenAI Codex CLI
-├── GEMINI.md                          # Entry point for Gemini CLI
 ├── skills/
 │   ├── prd-write/
 │   │   ├── SKILL.md                   # Entry point for Claude Code (/prd-write)
 │   │   ├── references/
 │   │   │   ├── prd-structure.md       # Full 3-phase PRD template
-│   │   │   └── prd-structure-lite.md  # Lite template (Phase 2 & 3 only)
+│   │   │   ├── prd-structure-index.md
+│   │   │   ├── prd-structure-section-1.md
+│   │   │   ├── prd-structure-section-2.md
+│   │   │   ├── prd-structure-section-3.md
+│   │   │   └── success-metrics-principles.md
 │   │   └── templates/
 │   │       ├── saas-feature.md        # SaaS-specific guidance
 │   │       ├── mobile-app.md          # Mobile-specific guidance
