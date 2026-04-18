@@ -61,7 +61,7 @@ Reference loading rule for section-only review:
   - Section 2 → [../prd-write/references/prd-structure-section-2.md](../prd-write/references/prd-structure-section-2.md)
   - Section 3 → [../prd-write/references/prd-structure-section-3.md](../prd-write/references/prd-structure-section-3.md)
 - For full PRD review, use [../prd-write/references/prd-structure.md](../prd-write/references/prd-structure.md) as the primary structure reference.
-- For NSM/metrics judgment in any scope, use [../prd-write/references/success-metrics-principles.md](../prd-write/references/success-metrics-principles.md) as the policy reference.
+- For NSM/metrics judgment in any scope, use [../prd-write/principles/success-metrics-principles.md](../prd-write/principles/success-metrics-principles.md) as the policy reference.
 ### Step 3: Identify PRD Type
 
 Before reviewing, determine whether this is a **Full PRD** or **Lite PRD**:

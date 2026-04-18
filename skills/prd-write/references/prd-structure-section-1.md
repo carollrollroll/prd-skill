@@ -2,7 +2,6 @@
 
 Use this focused template when drafting only Section 1.
 
-````markdown
 # Phase 1: Why & Who
 
 > Define the value, the audience, and how to prove it worked.
@@ -21,29 +20,28 @@ Use this focused template when drafting only Section 1.
 
 ---
 
-## 1.2 Persona 與用戶心理
+## 1.2 Persona & Stakeholders
 
-### Role Play / Job To Be Done (JTBD)
-| Persona | Role | Core Job To Be Done |
-|---------|------|---------------------|
-| [Primary] | [Job title / context] | When ___, I want to ___, so I can ___ |
-| [Secondary] | [Job title / context] | When ___, I want to ___, so I can ___ |
+Use this section as a compact structure. For detailed writing rules and examples, see `../principles/persona-stakeholder-principles.md`.
 
-### User Motivation / Cognitive Load
-- **Internal triggers:** [Emotional or habitual motivations driving use]
-- **External triggers:** [Notifications, prompts, or events that bring users in]
-- **Cognitive load concerns:** [What mental effort should we minimize?]
+### Persona & Requirements
+| Role | JTBD (When/Want/So I can) | Internal (Mindset/Cognitive Load) | External (Stakeholder Dynamics) | Result (Responsibility/Risk) |
+|------|----------------------------|-----------------------------------|----------------------------------|------------------------------|
+| [Primary role] | When ___, I want to ___, so I can ___ | [What drives or burdens this role mentally] | [How this role interacts with or is constrained by others] | [What this role must own and what risk it bears] |
+| [Secondary role] | When ___, I want to ___, so I can ___ | [What drives or burdens this role mentally] | [How this role interacts with or is constrained by others] | [What this role must own and what risk it bears] |
 
-### Stakeholder Relationship
-*(Optional — include when cross-team alignment is a risk.)*
+### Stakeholder Relationship (ASCII)
+*(Optional — include when role interaction is complex.)*
 
-| Stakeholder | Interest | Influence | Notes |
-|-------------|----------|-----------|-------|
-| [Name/Role] | [What they want] | High / Med / Low | |
+```text
+[External Factor: Regulation/Policy/SLA/Deadline] --> [Supervisor]
+[Requester] --> [Supervisor] --> [Committee Member] --> [Chairman]
+      \                |                 |                  /
+       \               v                 v                 /
+        -------------- [Secretary] -----------------------
+```
 
-### Responsibility & Risk
-- **Owner:** [Who is accountable for outcomes]
-- **Risks:** [What could go wrong, and who absorbs the cost]
+- Add evidence notes when available (`Interview` / `Data` / `Ticket` / `Hypothesis` / `Market Observation`) to strengthen requirement confidence.
 
 ---
 
@@ -96,4 +94,3 @@ Use this focused template when drafting only Section 1.
 | Out of Scope | [What this test does NOT validate] |
 | Success Signal (optional) | [What observation supports the hypothesis] |
 | Failure Signal (optional) | [What observation weakens/rejects the hypothesis] |
-````

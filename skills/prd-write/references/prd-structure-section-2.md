@@ -116,7 +116,7 @@ Because otherwise ___.
 ## 2.5 NSM Validation via P0 (Required for P0 Changes)
 
 > Section 1 owns NSM direction. This section proves P0 can move it.
-> Reference: [success-metrics-principles.md](success-metrics-principles.md)
+> Reference: [../principles/success-metrics-principles.md](../principles/success-metrics-principles.md)
 
 ### Section 1 Metric Reference (Do Not Redefine Here)
 - NSM (1): [Reference to Section 1.4]

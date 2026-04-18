@@ -8,6 +8,10 @@ Use this index when drafting PRDs section-by-section.
 - Section 3 (How & Next): [prd-structure-section-3.md](prd-structure-section-3.md)
 - Full consolidated template: [prd-structure.md](prd-structure.md)
 
+## Supporting References
+- Persona & Stakeholders writing guide: [../principles/persona-stakeholder-principles.md](../principles/persona-stakeholder-principles.md)
+- Success metrics writing guide: [../principles/success-metrics-principles.md](../principles/success-metrics-principles.md)
+
 ## Mode Selection (Full vs Lite)
 Use the same section files for both modes. Lite is a generation/review mode, not a separate template file.
 

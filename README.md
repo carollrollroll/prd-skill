@@ -163,7 +163,9 @@ prd-skill/
 │   │   │   ├── prd-structure-section-1.md
 │   │   │   ├── prd-structure-section-2.md
 │   │   │   ├── prd-structure-section-3.md
-│   │   │   └── success-metrics-principles.md
+│   │   ├── principles/
+│   │   │   ├── success-metrics-principles.md
+│   │   │   └── persona-stakeholder-principles.md
 │   │   └── templates/
 │   │       ├── saas-feature.md        # SaaS-specific guidance
 │   │       ├── mobile-app.md          # Mobile-specific guidance

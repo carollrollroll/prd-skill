@@ -52,7 +52,8 @@ Focused drafting references:
 - [references/prd-structure-section-1.md](references/prd-structure-section-1.md)
 - [references/prd-structure-section-2.md](references/prd-structure-section-2.md)
 - [references/prd-structure-section-3.md](references/prd-structure-section-3.md)
-- [references/success-metrics-principles.md](references/success-metrics-principles.md)
+- [principles/success-metrics-principles.md](principles/success-metrics-principles.md)
+- [principles/persona-stakeholder-principles.md](principles/persona-stakeholder-principles.md)
 
 Usage rule:
 - Section-by-section drafting should use the focused section files.
