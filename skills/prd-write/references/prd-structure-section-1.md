@@ -66,6 +66,8 @@ Reference: `../principles/value-capture-principles.md`
 
 ## 1.4 成功指標 Success Metrics
 
+Reference: `../principles/nsm-metrics-principles.md`
+
 ### NSM Direction (Problem-First)
 - **Problem being solved:** [What user pain is reduced]
 - **Behavior change we expect first:** [What users should do differently]
