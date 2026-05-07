@@ -1,6 +1,6 @@
 # NSM Metrics Principles
 
-Use this reference when defining metrics in PRDs, especially in `Section 1.4` and `Section 2.5`.
+Use this reference when defining metrics in PRDs, especially in `Section 1.4`.
 
 ## 1. Core Mindset (Problem First)
 
