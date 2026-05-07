@@ -4,6 +4,8 @@
 
 ## 1.1 問題與情境 Context
 
+Reference: `../principles/problem-framing-principles.md`
+
 ### As-Is / To-Be
 - **Current state (As-Is):** [How users solve this today and what's broken about it]
 - **Future state (To-Be):** [What the experience looks like after this ships]
@@ -40,6 +42,8 @@ Reference: `../principles/persona-stakeholder-principles.md`
 ---
 
 ## 1.3 商業價值 Business Value
+
+Reference: `../principles/value-capture-principles.md`
 
 ### Usage Value / Time-to-Value (TTV)
 [How quickly does a new user experience the core value? What's the activation moment?]
