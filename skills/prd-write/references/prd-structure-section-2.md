@@ -5,6 +5,7 @@
 
 ## 2.1 核心 User Story
 *(Optional)*
+> Reference: [../principles/user-story-ac-principles.md](../principles/user-story-ac-principles.md)
 
 ```
 As a ___
@@ -17,6 +18,7 @@ Because otherwise ___.
 
 ## 2.2 MoSCoW User Stories & Acceptance Criteria
 > Reference: [../principles/user-story-ac-principles.md](../principles/user-story-ac-principles.md)
+> Reference: [../principles/moscow-prioritization-principles.md](../principles/moscow-prioritization-principles.md)
 
 ### ID Convention (required for traceability)
 - Story IDs: `US-01`, `US-02`, `US-03`...
@@ -78,81 +80,80 @@ Because otherwise ___.
 ---
 
 ## 2.3 使用流程 User Flow & Use Cases
+> Reference: [../principles/user-flow-principles.md](../principles/user-flow-principles.md)
 
-### Core Path (Happy Path)
-1. [Step 1 — entry point]
-2. [Step 2 — key action]
-3. [Decision point: if A → go to step X, if B → go to step Y]
-4. [Step N — success state]
+### 正流程 Happy Path
+[Primary actor achieves the intended outcome without interruption. Describe the key sequence at a high level.]
 
-### Reverse Flow
-[What happens when the user cancels, goes back, or undoes? Define each exit point.]
+**Use Cases:**
 
-### Edge Cases & Exception Paths
-| Scenario | Trigger | Expected Behavior |
-|----------|---------|-------------------|
-| [Edge case 1] | [What causes it] | [What should happen] |
-| [Edge case 2] | [What causes it] | [What should happen] |
+#### UC-[module]-001: [Use Case Name]
+**Actor**: [Primary role]
+**Trigger**: [What initiates this use case]
+**Flow**:
+1. [Actor action → observable system response]
+2. [Next step]
+3. [Outcome: end state the user observes]
+**Business Rules**:
+- Pre-checks: [validation and authorization conditions that must pass]
+- Side effects: [system actions beyond the primary write — sub-records, notifications, cascades]
 
-### Guardrails & Error Handling
-| Error | User-Facing Message | Recovery Action |
-|-------|---------------------|-----------------|
-| [Error type] | [Message shown] | [How user recovers] |
+---
 
-### Multi-User Interaction (Concurrent Access & Conflict)
+### 逆流程 Reverse Flow
+[Actor cancels, goes back, or undoes. What state does the system return to? What data is preserved or discarded?]
+
+**Use Cases:**
+
+#### UC-[module]-00N: [Use Case Name]
+**Trigger**: [What initiates this reverse — cancel action, timeout, system condition]
+**Flow**:
+1. [Step → system response]
+2. [End state after reversal]
+**Business Rules**:
+- Pre-checks: [conditions checked before reversal is allowed]
+- Side effects: [data released, reservations cancelled, notifications sent]
+
+---
+
+### 分支流程 Branch Flow
+[Conditions that cause the flow to deviate from the happy path. Each branch has its own end state.]
+
+**Use Cases:**
+
+#### UC-[module]-00N: [Branch Name]
+**Trigger / Condition**: [What causes this branch — permission check fails, validation error, external dependency unavailable]
+**Flow**:
+1. [Step → system response]
+2. [End state: what the user sees and whether recovery is possible]
+**Business Rules**:
+- Pre-checks: [conditions that route into this branch]
+- Side effects: [what the system does when this branch is taken]
+
+---
+
+### Multi-User Interaction (when applicable)
 [How does the system behave when multiple users act on the same resource simultaneously? Define conflict resolution strategy.]
 
 ### Service Blueprint (Optional)
-[Include only when cross-layer visibility is needed for alignment.]
+[Include only when invisible system behavior materially affects user-visible outcomes — async processing, external integrations, background state changes.]
 
 ---
 
-## 2.4 業務邏輯 Business Logic & Important Notes
+## 2.4 業務規則 Business Rules
+> Reference: [../principles/business-rules-principles.md](../principles/business-rules-principles.md)
 
-### Authorization / RBAC / Do's & Don'ts
-| Role | Can Do | Cannot Do |
-|------|--------|-----------|
-| [Role 1] | | |
-| [Role 2] | | |
-
-### Transaction Rules & Events
-[Business rules that govern state changes: validations, triggers, side effects]
+### Authorization / RBAC
+| Role | Action | Permission | Condition (if any) |
+|------|--------|------------|-------------------|
+| [Role] | [Action] | ✅ / ❌ / Conditional | [e.g., owner only, same tenant] |
 
 ### Audit Trail & Versioning
-[What actions are logged? Who can see the log? Is versioning/rollback required?]
+[Which entities need history? Type: audit log (who/when) or snapshot (full state). Scope: which fields, what triggers a new entry, retention period.]
 
 ### Source of Truth & Data Export
-[What is the canonical data source? What export formats are supported?]
+**Data sources:** [For each key field or entity — user input / computed / external system / seeded. For external sources: freshness expectation and unavailability behavior.]
 
----
+**Exports:** [What data, what format, to whom, on-demand or scheduled. Note any data governance constraints.]
 
-## 2.5 NSM Validation via P0 (Required for P0 Changes)
-
-> Reference: [../principles/nsm-metrics-principles.md](../principles/nsm-metrics-principles.md)
-
-### Section 1 Metric Reference (Do Not Redefine Here)
-- NSM (1): [Reference to Section 1.4]
-- Leading (optional): [Reference to Section 1.4]
-- Lagging (optional): [Reference to Section 1.4]
-- Counter (optional): [Reference to Section 1.4]
-
-### P0 Story -> Leading Metric Contribution
-| P0 Story ID | Behavior changed by this P0 | Leading metric contribution | Validation signal |
-|-------------|-----------------------------|-----------------------------|-------------------|
-| [US-01] | [Behavior delta] | [How this P0 moves leading] | [Event or log evidence] |
-
-### Causality & Confounder Check
-| Link | Why it is causal (not correlation) | Main confounder | Mitigation |
-|------|------------------------------------|-----------------|------------|
-| [P0 -> Leading -> NSM] | [Reasoning] | [Competing explanation] | [How to control] |
-
-### Optional Data Reliability & Slice Checks
-- **Data reliability thresholds:** missing rate <= [x]%, event delay <= [x] min, duplicate rate <= [x]%
-- **Core slice for review:** [new vs returning / plan tier / region]
-
-### Decision Rules (Launch / Iterate / Rollback) (Required)
-- If leading is defined and reaches [threshold] within [window], continue rollout and monitor lagging (if defined).
-- If leading is defined but fails while adoption is sufficient, revise P0 design/flow.
-- If no leading is defined, use direct NSM movement over [window] as the primary iterate signal.
-- If counter is defined and breaches [threshold], pause or rollback regardless of leading/NSM gain.
 ````
