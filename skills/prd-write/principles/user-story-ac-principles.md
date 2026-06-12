@@ -34,6 +34,7 @@ Quality checks:
 3. Split when one story mixes roles.
 4. Split when a story has `>=10` ACs or `>=2` unrelated scenario families.
 5. Preserve traceability IDs when splitting (e.g., `US-01` -> `US-01A`, `US-01B`).
+6. **Split Create and Edit into separate stories when they have different entry points** (e.g., Create triggered from List page modal; Edit triggered from Detail page). A single story must not silently bundle both — if the preconditions, entry UI, and form context differ, they are different user goals.
 
 ## 4. AC Contract
 
@@ -126,6 +127,33 @@ and no payment authorization request is sent.
 Field Definitions: `shipping_address_id` (uuid, required), `validation_error_code` (string, required when invalid), `payment_auth_request_id` (must remain null).
 Verification: Submit without `shipping_address_id`; verify validation error and no `payment_auth_request_id`.
 ```
+
+## 10. Entity Lifecycle Coverage (Status Machine Cross-Check)
+
+When a PRD defines a Status Machine or state/permission table for an entity:
+
+1. List every user-executable action marked available (✅) per status in the Status Machine.
+2. Verify each action has at least one User Story covering it as a **standalone user goal** — not merely as a side-effect of another story.
+3. Apply Slicing Rule 6: if Create and Edit have different entry points, they must be separate stories.
+4. A ✅ action in the Status Machine with no corresponding US is a `[Gap]` finding.
+
+**Common missed patterns:**
+
+| Missed action | Symptom |
+|---------------|---------|
+| Edit existing entity (draft/active state) | Create US exists, but no Edit US; detail page ends up read-only |
+| Delete / Archive from detail page | Delete only covered in list-page bulk action; detail page has no entry point |
+| Status transition trigger (e.g., draft → committed) | Mentioned in Status Machine but no US defines the UI trigger or confirmation flow |
+| Undo / Revert after state change | Reverse Flow mentioned in flow diagram but no US owns the revert action |
+
+**Check procedure for `/prd-check story`:**
+
+1. Locate the Status Machine section of the PRD.
+2. For each entity status row, extract every ✅ column.
+3. For each ✅ action, search the US table for a story where that action is the **primary** user goal (not a sub-step).
+4. Report missing stories as `[Gap]` findings under `🔧 Fix`.
+
+---
 
 ## 9. Common Anti-Patterns
 
