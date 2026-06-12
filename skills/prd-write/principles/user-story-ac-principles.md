@@ -36,6 +36,32 @@ Quality checks:
 5. Preserve traceability IDs when splitting (e.g., `US-01` -> `US-01A`, `US-01B`).
 6. **Split Create and Edit into separate stories when they have different entry points** (e.g., Create triggered from List page modal; Edit triggered from Detail page). A single story must not silently bundle both — if the preconditions, entry UI, and form context differ, they are different user goals.
 
+## 3.5. AC Derivation from Story Terms
+
+AC writing must start from the User Story itself, not the author's intuition. Before writing any AC, decompose every key **noun** and **verb** in the story text and ask: "What constraint does this concept impose on the system?"
+
+**Decomposition steps:**
+
+1. **Nouns** (entities, roles, data) — For each noun, ask: What attributes does it have? Who can read/modify it? What are its valid states?
+2. **Verbs** (actions, outcomes) — For each verb, ask: What triggers it? What is the observable result? What are the preconditions?
+3. **"So that" clause** — Work backwards from the stated benefit: what must be true for the user to achieve it?
+4. **Gap check** — After writing ACs from the above, ask: "Are there implied concepts not yet covered?" Add ACs for any gap found.
+
+**Example — US-01:**
+> "As a System Owner, I want to **create** a new **ADR** with **structured fields** so that my **decision is captured completely**."
+
+| Story term | Question | → AC focus |
+|------------|---------|------------|
+| System Owner | Who has permission to create? What can other roles do? | Permission / RBAC boundary |
+| ADR | What entity is created? What fields does it have? | Field definition |
+| structured fields | Which fields are required vs. optional? | Validation rules |
+| decision is captured completely | What does "complete" mean? Author, timestamp, ID? | Record integrity |
+| (implied) | What if the action fails or is cancelled? | Error Handling + Reverse Flow |
+
+**Rule:** Any key noun or verb in the User Story with no corresponding AC is a coverage `[Gap]`. Flag it during review.
+
+---
+
 ## 4. AC Contract
 
 Baseline pattern:
