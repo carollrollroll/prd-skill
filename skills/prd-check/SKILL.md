@@ -19,6 +19,7 @@ Run a focused, principle-based validation on one specific PRD section.
 | `moscow` | Section 2 — MoSCoW 優先級 | `principles/moscow-prioritization-principles.md` |
 | `flow` | Section 2.3 — 使用流程 User Flow | `principles/user-flow-principles.md` |
 | `rules` | Section 2.4 — 業務邏輯 Business Rules | `principles/business-rules-principles.md` |
+| `technical` | Section 1/2/3 — 技術邊界 Technical Boundary | `principles/technical-boundary-principles.md` |
 
 Principles 檔案路徑相對於本 skill：`../prd-write/principles/<file>.md`
 
@@ -65,7 +66,7 @@ Use the following problem type tags as prefixes on Fix / Discuss items:
 | `[Fallacy]` | The reasoning is logically flawed |
 | `[Redundancy]` | Same behavior described multiple times without added meaning |
 | `[Dangling]` | References something undeclared or unowned |
-| `[Overreach]` | Specifies implementation details that belong to Engineering |
+| `[Overreach]` | Specifies implementation details that belong to Engineering (see `principles/technical-boundary-principles.md`) |
 | `[Unowned]` | Cross-module behavior with no clear owner |
 
 Use one tag per item. If two apply, use the one that best describes the root cause.

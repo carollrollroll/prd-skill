@@ -102,7 +102,7 @@ For each Fix or Discuss item, prefix the issue title with a **problem type tag**
 | `[Fallacy]` | The reasoning itself is logically flawed — the conclusion doesn't follow from the premise (e.g., the NSM denominator cannot be observed) |
 | `[Redundancy]` | Multiple Stories or ACs describe the same behavior without adding new meaning |
 | `[Dangling]` | References a dependency that is undeclared, out of scope, or unowned |
-| `[Overreach]` | PM is specifying implementation details that belong to Engineering |
+| `[Overreach]` | PM is specifying implementation details that belong to Engineering (see `principles/technical-boundary-principles.md`) |
 | `[Unowned]` | Cross-module behavior with no clear owner or integration contract |
 
 Use only one tag per issue. If two apply, choose the one that best describes the root cause.
@@ -138,6 +138,13 @@ After completing the completeness check, ask: *Does this Section say anything ge
 - Persona reads like a job title with attributes, not a real person with specific tension and motivation
 - The entire Section could be copy-pasted into a competitor's PRD unchanged — if so, it has no soul
 
+**Section 1 — Technical Boundary Check**
+
+Flag if Section 1 uses technical terminology instead of business language (see `principles/technical-boundary-principles.md` for detailed guidance):
+- Problem statement describes technical solutions (MySQL, Redis, Kubernetes, microservices) instead of business pain points (slow response, scaling limitations, deployment complexity)
+- Market trends cite specific technologies (OAuth, JWT, containerization) instead of business capabilities (authentication requirements, operational agility)
+- As-Is / To-Be delta is framed as a technology migration instead of a capability gap
+
 **Section 2 — What & If** *(counts toward required coverage: 6 points)*
 - [ ] User Stories are MoSCoW-prioritized (P0 / P1 / P2 / P3)
 - [ ] Every P0 Story has testable, unambiguous Acceptance Criteria — each AC should describe the condition, action, and expected outcome; flag ACs that are vague, missing conditions or results, or written as requirements rather than acceptance criteria (Given/When/Then is one valid format, not the only one)
@@ -157,6 +164,13 @@ After the completeness check, examine logical rigor and coherence with Section 1
 - **Metrics validation logic**: If optional leading/lagging/counter metrics are present, are they used to support decisions (not vanity decoration)? If absent, does Section 2 still provide a direct NSM validation path through P0 behaviors?
 - **Scope drift**: Do P1/P2 Stories quietly expand beyond what Section 1 can reasonably justify?
 - **Gate readiness**: Is Section 2 logically stable enough to justify entering Section 3, or are there unresolved blockers that must be fixed first?
+
+**Section 2 — Technical Boundary Check**
+
+Flag if Acceptance Criteria describe system implementation instead of user-observable behavior (see `principles/technical-boundary-principles.md` for detailed guidance):
+- AC specifies technical mechanisms (JWT token, HTTP 500, database schema, API endpoint paths, version fields, locks) instead of behavior (verify identity, show error message, record information, provide interface, handle conflicts)
+- Error Handling references internal implementation details (catch exception, write to error_log table) instead of user experience (display error message, allow retry)
+- AC describes data structure internals (field names, foreign keys, indexes) instead of business entities and relationships
 
 **Section 3 — How & Next** *(counts toward required coverage: 2 points)*
 - [ ] Known technical dependencies or constraints are listed
@@ -195,6 +209,39 @@ Section 3 should define *what to build* and *where the boundaries are* — not *
 - **Roadmap without rationale**: Future Epics or Won't Do items should explain *why not now*, not just list feature names
 - **Trade-offs without consequences**: If trade-offs are listed, the accepted cost should be explicit — "we chose X, accepting that Y will happen"
 - **Gate misuse**: Section 3 attempts to compensate for unresolved Section 2 logic gaps by injecting implementation details (should be fixed in Section 2 instead)
+
+**Section 3 — Technical Boundary Check (Primary Focus)**
+
+See `principles/technical-boundary-principles.md` for comprehensive guidance. Flag if Section 3 contains Technical How instead of Business How:
+
+**Common Technical How violations to flag:**
+1. **Technical implementation solutions** (should be effect descriptions):
+   - ❌ Specifies: heartbeat lock, optimistic lock, pessimistic lock, distributed lock, version fields, ETag
+   - ✅ Should describe: "one user edits at a time" or "conflicts prompt user to reload"
+   
+2. **Precise performance numbers** (should be ranges with engineering note):
+   - ❌ Specifies: "< 200ms (p99)", "< 500ms", TPS/QPS targets
+   - ✅ Should describe: "fast response (target < 1 second)" + note "※ Specific metrics defined by Engineering"
+
+3. **Detailed data structure** (should be concept-level only):
+   - ❌ Lists: complete field trees, types (UUID, string(200)), indexes, foreign keys, nested structures
+   - ✅ Should describe: entity concepts, core attributes, relationships + note "※ Detailed structure in API Spec/Schema"
+
+4. **Technical terminology** (should be business language):
+   - ❌ Uses: timestamp, null values, atomic writes, retry queues, cache penetration
+   - ✅ Should use: time, empty/blank, data consistency, reliability mechanisms
+
+**What to preserve (Business How):**
+- User operation flows (main/alternative/error paths, workflow breakpoints)
+- Business rules (state transitions, ID assignment, version increment logic, permission conditions)
+- Exception handling (Reverse Flow, Error Handling, degradation strategies, conflict resolution)
+
+Reference the 5 common patterns in `technical-boundary-principles.md`:
+1. Resource locking & concurrency
+2. Performance & efficiency requirements
+3. Entity & data model
+4. Audit & tracking
+5. External integration & failure handling
 
 **Cross-Module Story Ownership Check**
 
