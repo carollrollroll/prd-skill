@@ -10,4 +10,4 @@ PRD skill 定義位於 `../skills/`，每個子目錄下各有一個 `SKILL.md`�
 |-------|------|------|
 | `/prd-write` | `../skills/prd-write/SKILL.md` | 撰寫 PRD（Full / Lite）|
 | `/prd-review` | `../skills/prd-review/SKILL.md` | 審查 PRD 完整度 |
-| `/prd-check` | `../skills/prd-check/SKILL.md` | 針對特定章節的 principle 驗證（`/prd-check nsm`、`/prd-check persona` 等）|
+| `/prd-verify` | `../skills/prd-verify/SKILL.md` | 針對特定章節的 principle 驗證（`/prd-verify nsm`、`/prd-verify persona` 等）|

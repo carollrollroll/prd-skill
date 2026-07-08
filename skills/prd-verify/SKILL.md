@@ -1,9 +1,9 @@
 ---
-name: prd-check
-description: Use this skill when the user wants to validate a specific section of a PRD against quality principles — e.g., "/prd-check nsm", "/prd-check persona", "/prd-check story", "/prd-check flow", "/prd-check moscow", "/prd-check problem", "/prd-check value", "/prd-check rules". Use for targeted, principle-based spot checks on individual PRD sections rather than a full PRD review.
+name: prd-verify
+description: Use this skill when the user wants to validate a specific section of a PRD against quality principles — e.g., "/prd-verify nsm", "/prd-verify persona", "/prd-verify story", "/prd-verify flow", "/prd-verify moscow", "/prd-verify problem", "/prd-verify value", "/prd-verify rules". Use for targeted, principle-based verification on individual PRD sections rather than a full PRD review.
 ---
 
-# PRD Check Skill
+# PRD Verify Skill
 
 Run a focused, principle-based validation on one specific PRD section.
 
@@ -77,7 +77,7 @@ Do not penalize content that is out of scope for the selected check.
 ### Step 5: Output
 
 ```
-## PRD Check: [Section Name]
+## PRD Verify: [Section Name]
 
 **File / Section:** [path or section title]
 **Principle Reference:** [principles filename]
