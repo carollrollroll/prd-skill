@@ -76,10 +76,16 @@ Before drafting Section 1, ask the user to answer these required anchors in thei
 4. What is the business value (revenue/cost/risk/retention/strategic leverage)?
 5. What is the North Star Metric and why does it reflect real value (not vanity)?
 
+**⚠️ Technical Boundary Reminder (Section 1)**:
+- Use **business language** to describe problems, not technical solutions
+- ❌ Avoid: MySQL, Redis, Kubernetes, microservices, containerization, OAuth, JWT
+- ✅ Use instead: performance bottleneck, slow response, scaling limitations, deployment complexity, authentication requirements
+
 Then perform a **Soul Check** before drafting:
 - Is the problem truly specific and observable?
 - Is the logic coherent (not hand-wavy)?
 - Does the claim have business value, not just “sounds good” language?
+- Does the problem statement avoid technical implementation details?
 
 If any anchor is missing or vague in Full mode, do not proceed to draft. Ask focused follow-up questions.
 For Lite mode, skip Section 1 drafting and collect:
@@ -111,9 +117,15 @@ Generate Section 2 and enforce alignment with Section 1 anchors:
 - Include core flow + edge/error cases
 - Include Won't Have (P3)
 
+**⚠️ Technical Boundary Reminder (Section 2)**:
+- AC describes **user-observable behavior**, not system internal implementation
+- ❌ Avoid: JWT token, HTTP 500, database schema, API endpoint paths, version fields, locks
+- ✅ Use instead: verify identity, show error message, record information, provide interface, handle conflicts
+
 Run Section 2 logic checks:
 - Missing / Error / Redundancy / Duplication / Contradiction / Ambiguity
 - Scope drift against Section 1 intent
+- AC avoids technical implementation details
 
 If multiple solution patterns are valid, present options with trade-offs and ask the user to choose.
 
@@ -165,7 +177,9 @@ Before finishing, verify the PRD has:
 - [ ] Lite PRD: parent North Star is referenced, and Section 2 explains how P0 validates that NSM direction
 - [ ] Full PRD: Section 1 anchors come from explicit user input (not AI-generated guesses)
 - [ ] Lite PRD: parent Section 1 anchors are explicitly referenced before Section 2 drafting
+- [ ] Section 1 uses business language (not technical terms like MySQL, Redis, Kubernetes)
 - [ ] MoSCoW-prioritized user stories (P0 stories must have Acceptance Criteria)
+- [ ] Section 2 AC describes user-observable behavior (not JWT, HTTP codes, database schemas)
 - [ ] Core flow + at least one edge case or error state defined
 - [ ] A Won't Have (P3) section to prevent scope creep
 - [ ] Open Questions section for unresolved decisions
