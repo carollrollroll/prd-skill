@@ -55,7 +55,7 @@ Focused drafting references:
 - [principles/nsm-metrics-principles.md](principles/nsm-metrics-principles.md)
 - [principles/persona-stakeholder-principles.md](principles/persona-stakeholder-principles.md)
 - [principles/user-story-ac-principles.md](principles/user-story-ac-principles.md)
-- [principles/section-3-technical-boundary.md](principles/section-3-technical-boundary.md)
+- [principles/technical-boundary-principles.md](principles/technical-boundary-principles.md)
 
 Usage rule:
 - Section-by-section drafting should use the focused section files.
@@ -148,7 +148,7 @@ Hard boundary rules (prevent overreach):
 - Do include: states, transition triggers, API intent, ownership boundary, dependency contracts, NFR constraints (effect-level)
 - Do not include: low-level algorithms, DB schema micromanagement, exact internal implementation details, specific technical solutions (e.g., "heartbeat lock", "optimistic lock"), precise performance numbers (use ranges instead), detailed field-level data models
 
-**Technical Boundary Principle**: Preserve **Business How** (user flows, business rules, exception handling), remove **Technical How** (implementation solutions, exact performance thresholds, database schemas). See [principles/section-3-technical-boundary.md](principles/section-3-technical-boundary.md) for detailed guidance and examples.
+**Technical Boundary Principle**: Preserve **Business How** (user flows, business rules, exception handling), remove **Technical How** (implementation solutions, exact performance thresholds, database schemas). See [principles/technical-boundary-principles.md](principles/technical-boundary-principles.md) for detailed guidance and examples.
 
 ### Step 6: Final Consolidation
 
