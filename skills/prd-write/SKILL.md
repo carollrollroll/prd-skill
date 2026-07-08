@@ -55,6 +55,7 @@ Focused drafting references:
 - [principles/nsm-metrics-principles.md](principles/nsm-metrics-principles.md)
 - [principles/persona-stakeholder-principles.md](principles/persona-stakeholder-principles.md)
 - [principles/user-story-ac-principles.md](principles/user-story-ac-principles.md)
+- [principles/section-3-technical-boundary.md](principles/section-3-technical-boundary.md)
 
 Usage rule:
 - Section-by-section drafting should use the focused section files.
@@ -132,8 +133,10 @@ Section 3 must stay aligned with approved Section 2:
 - Avoid contradiction with Section 2 behaviors
 
 Hard boundary rules (prevent overreach):
-- Do include: states, transition triggers, API intent, ownership boundary, dependency contracts, NFR constraints
-- Do not include: low-level algorithms, DB schema micromanagement, exact internal implementation details unless user explicitly asks for technical design depth
+- Do include: states, transition triggers, API intent, ownership boundary, dependency contracts, NFR constraints (effect-level)
+- Do not include: low-level algorithms, DB schema micromanagement, exact internal implementation details, specific technical solutions (e.g., "heartbeat lock", "optimistic lock"), precise performance numbers (use ranges instead), detailed field-level data models
+
+**Technical Boundary Principle**: Preserve **Business How** (user flows, business rules, exception handling), remove **Technical How** (implementation solutions, exact performance thresholds, database schemas). See [principles/section-3-technical-boundary.md](principles/section-3-technical-boundary.md) for detailed guidance and examples.
 
 ### Step 6: Final Consolidation
 
@@ -172,4 +175,8 @@ Before finishing, verify the PRD has:
 - [ ] No unresolved Story/AC redundancy without clear entry-point UX differentiation
 - [ ] Section 2 is explicitly approved before Section 3 starts
 - [ ] Section 3 does not overreach into engineering implementation details
+- [ ] Section 3 avoids technical terminology (e.g., "timestamp" → "time", "null" → business term, "heartbeat lock" → effect description)
+- [ ] Section 3 NFR uses ranges instead of exact numbers (e.g., "< 1 second" instead of "< 500ms"), with note that specifics are defined by engineering
+- [ ] Section 3 data model is concept-level only, with explicit note that detailed structure is defined in API Spec/Schema
+- [ ] Section 3 preserves all Business How (user flows, business rules, exception handling) while removing Technical How
 - [ ] Traceability is clear: Section 1 pain point → Section 2 Story/AC → Section 3 contract/constraint
