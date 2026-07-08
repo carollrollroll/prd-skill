@@ -27,6 +27,19 @@ When you ask Claude to "review my PRD", "check if my PRD is ready", or similar, 
 - Tags issues by problem type: `[Contradiction]`, `[Gap]`, `[Fallacy]`, `[Redundancy]`, `[Dangling]`, `[Overreach]`, `[Unowned]`
 - Delivers a verdict: ✅ APPROVED / ⚠️ APPROVED WITH CONDITIONS / ❌ NEEDS REVISION
 
+### `/prd-verify` — Verify a Specific Section
+
+When you need to validate a specific section of your PRD against quality principles during writing, use this skill for targeted, principle-based verification:
+
+- Validates individual sections (NSM, Persona, Story, Flow, MoSCoW, Problem, Value, Rules, Technical Boundary)
+- Checks against authoritative principles files
+- Provides focused feedback: ✅ OK / 🔧 Fix / 💬 Discuss
+- Usage examples: `/prd-verify nsm`, `/prd-verify persona`, `/prd-verify story`
+
+**When to use:**
+- **`/prd-verify`** — Self-check while writing (validates specific section against principles)
+- **`/prd-review`** — Submit for approval (comprehensive review with approval decision)
+
 ## Installation
 
 ### Claude Code
@@ -44,8 +57,9 @@ cp -r /tmp/prd-skill/skills/. .claude/skills/
 ```bash
 git clone https://github.com/carollrollroll/prd-skill /tmp/prd-skill
 mkdir -p .claude/skills
-cp -r /tmp/prd-skill/skills/prd-write .claude/skills/prd-write          # writing only
+cp -r /tmp/prd-skill/skills/prd-write .claude/skills/prd-write      # writing only
 # cp -r /tmp/prd-skill/skills/prd-review .claude/skills/prd-review  # add review
+# cp -r /tmp/prd-skill/skills/prd-verify .claude/skills/prd-verify  # add verify
 ```
 
 #### Updating (Nth time)
@@ -61,7 +75,7 @@ If you only want to update one skill:
 cp -r /tmp/prd-skill/skills/prd-write .claude/skills/prd-write
 ```
 
-Then invoke with `/prd-write`, `/prd-review`, or just ask Claude naturally.
+Then invoke with `/prd-write`, `/prd-review`, `/prd-verify`, or just ask Claude naturally.
 
 ---
 
@@ -122,6 +136,24 @@ Is this PRD ready? [paste PRD content]
 
 The AI will output a structured review report with a clear verdict and actionable next steps.
 
+### Verifying a Specific Section
+
+While writing, validate individual sections against quality principles:
+
+```
+/prd-verify nsm
+```
+
+```
+/prd-verify persona — check my persona section
+```
+
+```
+Verify my user stories: [paste Section 2.1]
+```
+
+The AI will validate the section against authoritative principles and provide focused feedback.
+
 ## What You Get
 
 **After `/prd-write`**, Claude outputs a full PRD and offers to:
@@ -138,11 +170,17 @@ The AI will output a structured review report with a clear verdict and actionabl
 - Discuss list with questions for PM Lead alignment
 - OK highlights with specific praise
 
+**After `/prd-verify`**, Claude outputs a focused section validation with:
+- Section-specific findings (✅ OK / 🔧 Fix / 💬 Discuss)
+- Tagged issues by problem type
+- Verdict (✅ Pass / ⚠️ Needs Work / ❌ Blocked)
+- Specific next steps for the section
+
 ## Supported Tool
 
 | Tool | Entry Point | How It Works |
 |------|-------------|--------------|
-| [Claude Code](https://claude.ai/code) | `skills/prd-write/SKILL.md`, `skills/prd-review/SKILL.md` | Copy to `.claude/skills/` in your project |
+| [Claude Code](https://claude.ai/code) | `skills/prd-write/SKILL.md`, `skills/prd-review/SKILL.md`, `skills/prd-verify/SKILL.md` | Copy to `.claude/skills/` in your project |
 
 ## Templates Included
 
@@ -164,16 +202,21 @@ prd-skill/
 │   │   │   ├── prd-structure-section-2.md
 │   │   │   ├── prd-structure-section-3.md
 │   │   ├── principles/
-│   │   │   ├── success-metrics-principles.md
-│   │   │   └── persona-stakeholder-principles.md
+│   │   │   ├── nsm-metrics-principles.md
+│   │   │   ├── persona-stakeholder-principles.md
+│   │   │   ├── user-story-ac-principles.md
+│   │   │   ├── technical-boundary-principles.md
+│   │   │   └── ...                    # Other principle files
 │   │   └── templates/
 │   │       ├── saas-feature.md        # SaaS-specific guidance
 │   │       ├── mobile-app.md          # Mobile-specific guidance
 │   │       └── b2b-enterprise.md      # B2B / Enterprise guidance
-│   └── prd-review/
-│       ├── SKILL.md                   # Entry point for Claude Code (/prd-review)
-│       └── references/
-│           └── report-template.md     # Detailed PRD review report template
+│   ├── prd-review/
+│   │   ├── SKILL.md                   # Entry point for Claude Code (/prd-review)
+│   │   └── references/
+│   │       └── report-template.md     # Detailed PRD review report template
+│   └── prd-verify/
+│       └── SKILL.md                   # Entry point for Claude Code (/prd-verify)
 └── README.md
 ```
 
